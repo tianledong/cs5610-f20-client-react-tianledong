@@ -5,9 +5,8 @@ import '../components/CourseManager/CourseManager.css';
 
 class CourseManagerContainer extends React.Component {
     render() {
-        return <div className="wbdv-gray-bg">
+        return <div>
             <CourseManagerHeadingComponent/>
-
         </div>
     }
 }
