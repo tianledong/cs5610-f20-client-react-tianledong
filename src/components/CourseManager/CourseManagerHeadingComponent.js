@@ -12,7 +12,7 @@ class CourseManagerHeadingComponent extends React.Component {
                     <i className="fas fa-bars text-light"/>
                 </button>
                 <div className="d-none d-md-block">
-                    <a className="navbar-brand wbdv-label wbdv-course-manager">Course
+                    <a className="navbar-brand wbdv-label wbdv-course-manager" href="#">Course
                         Manager</a>
                 </div>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -30,14 +30,15 @@ class CourseManagerHeadingComponent extends React.Component {
             <main className="wbdv-fixed-padding">
                 <div className="d-none d-lg-block navbar navbar-expand wbdv-gray-bg container">
                     <div className="navbar-nav nav row">
-                        <h6 className="col-6 pt-2 wbdv-header wbdv-title"><strong>Title</strong>
-                        </h6>
+                        <div className="col-6 pt-2 row">
+                            <h6 className="wbdv-header wbdv-title"><strong>Title</strong></h6>
+                            <button className="btn wbdv-btn-abs wbdv-header wbdv-sort"><i
+                                className="mb-2 fas fa-sort-up fa-lg"/></button>
+                        </div>
                         <div className="col-2 pt-2 row">
                             <h6 className="wbdv-header wbdv-owner text-center"><strong>Owned
                                 by</strong>
                             </h6>
-                            <button className="btn wbdv-btn-abs wbdv-header wbdv-sort"><i
-                                className="mb-2 fa fa-sort-desc fa-lg"/></button>
                         </div>
                         <h6 className="col-2 pt-2 wbdv-header wbdv-last-modified text-center">
                             <strong>Last
@@ -59,4 +60,5 @@ class CourseManagerHeadingComponent extends React.Component {
         </header>
     }
 }
+
 export default CourseManagerHeadingComponent;

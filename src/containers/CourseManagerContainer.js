@@ -1,12 +1,13 @@
 import React from "react";
-import '../components/CourseManager/CourseManager.css'
 import CourseManagerHeadingComponent
     from "../components/CourseManager/CourseManagerHeadingComponent";
+import '../components/CourseManager/CourseManager.css';
 
 class CourseManagerContainer extends React.Component {
     render() {
-        return <div>
+        return <div className="wbdv-gray-bg">
             <CourseManagerHeadingComponent/>
+
         </div>
     }
 }
