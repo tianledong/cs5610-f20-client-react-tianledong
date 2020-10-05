@@ -5,6 +5,7 @@ import "@fortawesome/fontawesome-free/js/all.min.js";
 import LessonTabsComponent from "./LessonTabsComponent";
 import ModuleListComponent from "./ModuleListComponent";
 import TopicPillsComponent from "./TopicPillsComponent";
+import WidgetListComponent from "./WidgetListComponent";
 
 class CourseEditorComponent extends React.Component {
     render() {
@@ -17,9 +18,11 @@ class CourseEditorComponent extends React.Component {
                 </div>
                 <div className="col-lg-9 col-md-8 col-sm-7 bg-white p-3">
                     <TopicPillsComponent/>
+                    <WidgetListComponent/>
                 </div>
             </main>
         </div>
     }
 }
+
 export default CourseEditorComponent;
