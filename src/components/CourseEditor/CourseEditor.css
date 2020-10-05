@@ -1,0 +1,29 @@
+.wbdv-bg {
+    color: white;
+    background: #4c5154;
+}
+
+.wbdv-fixed-padding {
+    padding-top: 65px;
+}
+
+.wbdv-module-item-title {
+    padding: 0.3rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.wbdv-bg a {
+    color: white;
+    cursor: pointer;
+}
+.react-img {
+    max-width: 500px;
+}
+
+.wbdv-add-widget-fixed{
+    position: fixed;
+    bottom: 2%;
+    right: 1%;
+}
