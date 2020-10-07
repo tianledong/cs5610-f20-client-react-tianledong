@@ -29,8 +29,8 @@ class CourseRowComponent extends React.Component {
                  </tr>
                 }
             </td>
-            <td>{this.props.course.owner}</td>
-            <td>{this.props.course.modified}</td>
+            <td className="d-none d-md-table-cell">{this.props.course.owner}</td>
+            <td className="d-none d-lg-table-cell">{this.props.course.modified}</td>
             <td>
                 {!this.state.courseBeingEdited &&
                  <button
@@ -56,7 +56,6 @@ class CourseRowComponent extends React.Component {
                      <i className="fa fa-lg fa-check"/>
                  </button>
                 }
-
             </td>
         </tr>
     }

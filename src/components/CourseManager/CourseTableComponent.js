@@ -14,8 +14,8 @@ class CourseTableComponent extends React.Component {
                             <strong>Title</strong>
                             <button className="btn p-0 m-0">
                           <i className="fas fa-sort-up p-0 m-0"/></button></th>
-                        <th scope="col"><strong>Owned by</strong></th>
-                        <th scope="col"><strong>Last modified</strong></th>
+                        <th scope="col" className="d-none d-md-table-cell"><strong>Owned by</strong></th>
+                        <th scope="col" className="d-none d-lg-table-cell"><strong>Last modified</strong></th>
                         <th scope="col">
                             <Link to="/grid"
                                     className="btn wbdv-button wbdv-grid-layout">

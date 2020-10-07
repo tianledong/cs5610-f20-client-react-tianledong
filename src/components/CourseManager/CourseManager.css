@@ -23,3 +23,17 @@
     right: 1px;
     top: -9px;
 }
+
+.wbdv-btn-down{
+    position: relative;
+    right: -6px;
+    top: -11px;
+}
+
+.card {
+    min-width: 10em !important;
+    min-height: 18rem;
+}
+.card-body{
+    display: contents;
+}
