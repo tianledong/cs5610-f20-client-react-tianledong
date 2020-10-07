@@ -1,36 +1,37 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 class LessonTabsComponent extends React.Component {
     render() {
         return <header>
             <nav className="navbar navbar-expand navbar-dark fixed-top bg-dark">
-                <a className="navbar-brand btn wbdv-course-editor wbdv-close"
-                   href="#">
+                <Link className="navbar-brand btn wbdv-course-editor wbdv-close"
+                   to="/table">
                     <i className="fas fa-times fa-lg text-light"/>
-                </a>
+                </Link>
 
                 <div className="d-none d-md-block">
-                    <a className="navbar-brand wbdv-label wbdv-course-title">CS5610 - WebDev</a>
+                    <h6 className="navbar-brand wbdv-label wbdv-course-title m-0 p-0">CS5610 - WebDev</h6>
                 </div>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <a className="nav-link wbdv-lesson-tabs" href="#">Build</a>
+                            <Link className="nav-link wbdv-lesson-tabs" to="#">Build</Link>
                         </li>
                         <li className="nav-item active">
-                            <a className="nav-link wbdv-lesson-tabs" href="#">Pages</a>
+                            <Link className="nav-link wbdv-lesson-tabs" to="#">Pages</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link wbdv-lesson-tabs" href="#">Theme</a>
+                            <Link className="nav-link wbdv-lesson-tabs" to="#">Theme</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link wbdv-lesson-tabs" href="#">Store</a>
+                            <Link className="nav-link wbdv-lesson-tabs" to="#">Store</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link wbdv-lesson-tabs" href="#">Apps</a>
+                            <Link className="nav-link wbdv-lesson-tabs" to="#">Apps</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link wbdv-lesson-tabs" href="#">Settings</a>
+                            <Link className="nav-link wbdv-lesson-tabs" to="#">Settings</Link>
                         </li>
                     </ul>
                     <button className="btn col-2 m-1 mr-2 wbdv-lesson-add-btn text-white"><i
