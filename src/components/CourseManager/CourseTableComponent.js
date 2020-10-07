@@ -1,6 +1,7 @@
 import React from "react";
 
 import CourseRowComponent from "./CourseRowComponent";
+import {Link} from "react-router-dom";
 
 class CourseTableComponent extends React.Component {
     render() {
@@ -16,14 +17,14 @@ class CourseTableComponent extends React.Component {
                         <th scope="col"><strong>Owned by</strong></th>
                         <th scope="col"><strong>Last modified</strong></th>
                         <th scope="col">
-                            <button type="button"
+                            <Link to="/grid"
                                     className="btn wbdv-button wbdv-grid-layout">
                                 <i className="fas fa-lg fa-grip-horizontal"/>
-                            </button>
-                            <button type="button"
+                            </Link>
+                            <Link to="/"
                                     className="btn wbdv-button wbdv-list-layout">
                                 <i className="fas fa-lg fa-sort-alpha-down"/>
-                            </button></th>
+                            </Link></th>
                     </tr>
                     </thead>
                     <tbody>

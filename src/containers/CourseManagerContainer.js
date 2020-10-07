@@ -12,7 +12,8 @@ import {
     updateCourse
 } from "../services/CourseService";
 
-import {BrowserRouter, Link, Route} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
+import CourseGridComponent from "../components/CourseManager/CourseGridComponent";
 
 class CourseManagerContainer extends React.Component {
     state = {
@@ -57,7 +58,7 @@ class CourseManagerContainer extends React.Component {
                     path="/edit/:courseId"
                     exact
                     component={CourseEditorComponent}/>
-                <Route path="/table">
+                <Route path="/" exact>
                     <CourseHeadingComponent addNewCourseByTitle={this.addNewCourseByTitle}/>
                     <div className={"wbdv-fixed-padding"}>
                         <CourseTableComponent deleteCourse={this.deleteCourse}
@@ -65,9 +66,12 @@ class CourseManagerContainer extends React.Component {
                                               courses={this.state.courses}/>
                     </div>
                 </Route>
-                <Route path="grid">
+                <Route path="/grid" exact>
                     <CourseHeadingComponent addNewCourseByTitle={this.addNewCourseByTitle}/>
                     <div className={"wbdv-fixed-padding"}>
+                        <CourseGridComponent deleteCourse={this.deleteCourse}
+                                             updateCourse={this.updateCourse}
+                                             courses={this.state.courses}/>
                     </div>
 
                 </Route>
