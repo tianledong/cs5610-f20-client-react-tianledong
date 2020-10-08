@@ -7,8 +7,18 @@ class CourseRowComponent extends React.Component {
         course: this.props.course
     }
 
+    clickRow = (id) => {
+        const rowClass = "table-primary";
+        let selectedRow = document.getElementById(id).classList;
+        if (selectedRow.contains(rowClass)){
+            selectedRow.remove(rowClass);
+        } else {
+            selectedRow.add(rowClass);
+        }
+    };
+
     render() {
-        return <tr>
+        return <tr id={this.state.course._id} onClick={() => this.clickRow(this.state.course._id)}>
             <td>
                 {this.state.courseBeingEdited &&
                  <input
