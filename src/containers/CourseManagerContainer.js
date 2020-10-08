@@ -7,7 +7,6 @@ import CourseEditorComponent from "../components/CourseEditor/CourseEditorCompon
 import {
     deleteCourse,
     findAllCourses,
-    findCourseById,
     createCourse,
     updateCourse
 } from "../services/CourseService";

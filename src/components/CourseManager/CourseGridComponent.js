@@ -34,6 +34,7 @@ class CourseGridComponent extends React.Component {
                     this.props.courses.map(
                         course => <CourseCardComponent editCourse={this.props.updateCourse}
                                                        deleteCourse={this.props.deleteCourse}
+                                                       key={course._id}
                                                        course={course}/>)
                 }
                 </div>

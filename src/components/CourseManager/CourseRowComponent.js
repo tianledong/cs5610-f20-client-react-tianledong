@@ -16,17 +16,19 @@ class CourseRowComponent extends React.Component {
                      value={this.state.course.title} onChange={(e) => {
                      const newTitle = e.target.value;
                      this.setState(prevState => ({
-                         course: {...prevState.course, title: newTitle, modified: (new Date()).toDateString()}
+                         course: {
+                             ...prevState.course,
+                             title: newTitle,
+                             modified: (new Date()).toDateString()
+                         }
                      }))
                  }
                  }/>
                 }
                 {!this.state.courseBeingEdited &&
-                 <tr>
-                     <Link to={`edit/${this.state.course._id}`}><i
-                         className="fas fa-file-alt text-primary m-1"/>{this.state.course.title}
-                     </Link>
-                 </tr>
+                 <Link to={`edit/${this.state.course._id}`}><i
+                     className="fas fa-file-alt text-primary m-1"/>{this.state.course.title}
+                 </Link>
                 }
             </td>
             <td className="d-none d-md-table-cell">{this.props.course.owner}</td>

@@ -31,6 +31,7 @@ class CourseTableComponent extends React.Component {
                     {
                         this.props.courses.map(course =>
                                                    <CourseRowComponent
+                                                       key={course._id}
                                                        editCourse={this.props.updateCourse}
                                                        deleteCourse={this.props.deleteCourse}
                                                        course={course}/>
