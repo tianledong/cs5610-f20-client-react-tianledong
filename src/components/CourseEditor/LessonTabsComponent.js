@@ -6,7 +6,7 @@ class LessonTabsComponent extends React.Component {
         return <header>
             <nav className="navbar navbar-expand navbar-dark fixed-top bg-dark">
                 <Link className="navbar-brand btn wbdv-course-editor wbdv-close"
-                   to="/table">
+                   to="/">
                     <i className="fas fa-times fa-lg text-light"/>
                 </Link>
 
