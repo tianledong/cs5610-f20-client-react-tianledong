@@ -8,13 +8,7 @@ class CourseRowComponent extends React.Component {
     }
 
     clickRow = (id) => {
-        const rowClass = "table-primary";
-        let selectedRow = document.getElementById(id).classList;
-        if (selectedRow.contains(rowClass)){
-            selectedRow.remove(rowClass);
-        } else {
-            selectedRow.add(rowClass);
-        }
+        document.getElementById(id).classList.toggle("table-primary");
     };
 
     render() {
