@@ -72,9 +72,11 @@ class CourseManagerContainer extends React.Component {
                                              updateCourse={this.updateCourse}
                                              courses={this.state.courses}/>
                     </div>
-
                 </Route>
             </BrowserRouter>
+            <button className="btn wbdv-button wbdv-add-course-abs"
+                    onClick={() => this.addNewCourseByTitle("")}>
+                <i className="fas fa-3x text-danger fa-plus-circle"/></button>
         </div>
     }
 }
