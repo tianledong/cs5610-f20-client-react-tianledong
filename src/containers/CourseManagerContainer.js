@@ -1,7 +1,7 @@
 import React from "react";
 import CourseHeadingComponent
     from "../components/CourseManager/CourseHeadingComponent";
-import '../components/CourseManager/CourseManager.css';
+import '../components/CourseManager/CourseManagerComponent.css';
 import CourseTableComponent from "../components/CourseManager/CourseTableComponent";
 import CourseEditorComponent from "../components/CourseEditor/CourseEditorComponent"
 import {

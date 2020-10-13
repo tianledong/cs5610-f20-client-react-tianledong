@@ -1,5 +1,5 @@
 import React from "react";
-import "./CourseEditor.css";
+import "./CourseEditorComponent.css";
 import "bootstrap/dist/css/bootstrap.min.css"
 import "@fortawesome/fontawesome-free/js/all.min.js";
 import LessonTabsComponent from "./LessonTabsComponent";
