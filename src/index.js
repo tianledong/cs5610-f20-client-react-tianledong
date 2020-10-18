@@ -8,7 +8,7 @@ import "@fortawesome/fontawesome-free/js/all.min.js";
 import {Provider} from "react-redux";
 import {combineReducers, createStore} from "redux";
 
-const reducer = combineReducers({});;
+const reducer = combineReducers({});
 
 const store = createStore(reducer);
 
