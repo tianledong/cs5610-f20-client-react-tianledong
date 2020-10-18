@@ -18,7 +18,7 @@ export const deleteLesson = (lessonId) => ({
     lessonId: lessonId
 })
 
-export const findModulesForCourse = (lessons) => ({
+export const findLessonsForModule = (lessons) => ({
     type: FIND_LESSONS_FOR_MODULE,
     lessons: lessons
 })
