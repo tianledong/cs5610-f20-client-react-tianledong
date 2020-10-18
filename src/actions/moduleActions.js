@@ -1,7 +1,7 @@
 export const CREATE_MODULE = "CREATE_MODULE";
 export const UPDATE_MODULE = "UPDATE_MODULE";
 export const DELETE_MODULE = "DELETE_MODULE";
-export const FIND_Modules_For_Course = "FIND_Modules_For_Course";
+export const FIND_MODULE_FOR_COURSE = "FIND_Modules_For_Course";
 
 export const updateModule = (newModule) => ({
     type: UPDATE_MODULE,
@@ -19,7 +19,7 @@ export const deleteModule = (moduleId) => ({
 })
 
 export const findModulesForCourse = (modules) => ({
-    type: FIND_Modules_For_Course,
+    type: FIND_MODULE_FOR_COURSE,
     modules: modules
 })
 
