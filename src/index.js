@@ -7,8 +7,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/js/all.min.js";
 import {Provider} from "react-redux";
 import {combineReducers, createStore} from "redux";
+import moduleReducer from "./reducers/moduleReducer";
+import {lessonReducer} from "./reducers/lessonReducer";
+import {topicReducer} from "./reducers/topicReducer";
 
-const reducer = combineReducers({});
+const reducer = combineReducers({moduleReducer, lessonReducer, topicReducer});
 
 const store = createStore(reducer);
 

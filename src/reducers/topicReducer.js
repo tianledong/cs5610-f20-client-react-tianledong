@@ -2,7 +2,7 @@ const initialState = {
     topics: []
 };
 
-const topicReducer = (state = initialState, action) => {
+export const topicReducer = (state = initialState, action) => {
     switch (action.type) {
         case "FIND_TOPICS_FOR_LESSON":
             return {
