@@ -10,7 +10,7 @@ export const updateTopic = (newTopic) => ({
 
 export const createTopic = (newTopic) => ({
     type: CREATE_TOPIC,
-    lesson: newTopic
+    topic: newTopic
 })
 
 export const deleteTopic = (topicId) => ({
