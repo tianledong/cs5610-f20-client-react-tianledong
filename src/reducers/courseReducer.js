@@ -4,7 +4,7 @@ const initialState = {
     }
 }
 
-const courseReducer = (state=initialState, action) => {
+export const courseReducer = (state=initialState, action) => {
     switch(action.type) {
         case "SET_COURSES":
             return {
@@ -15,5 +15,4 @@ const courseReducer = (state=initialState, action) => {
             return state
     }
 }
-
 export default courseReducer;

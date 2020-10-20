@@ -8,19 +8,19 @@ import "@fortawesome/fontawesome-free/js/all.min.js";
 import {Provider} from "react-redux";
 import {combineReducers, createStore} from "redux";
 import moduleReducer from "./reducers/moduleReducer";
-import {lessonReducer} from "./reducers/lessonReducer";
-import {topicReducer} from "./reducers/topicReducer";
+import lessonReducer from "./reducers/lessonReducer";
+import topicReducer from "./reducers/topicReducer";
 import courseReducer from "./reducers/courseReducer";
 
-const reducer = combineReducers({courseReducer,moduleReducer, lessonReducer, topicReducer});
+const reducers = combineReducers({courseReducer, moduleReducer, lessonReducer, topicReducer});
 
-const store = createStore(reducer);
+const store = createStore(reducers);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

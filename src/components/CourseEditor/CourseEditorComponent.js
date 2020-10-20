@@ -9,11 +9,15 @@ import {findCourseById} from "../../services/CourseService";
 import moduleService from "../../services/ModuleService"
 import lessonService from "../../services/LessonService"
 import {Link} from "react-router-dom";
+import {setCourses} from "../../actions/courseActions";
+import {findModulesForCourse} from "../../actions/moduleActions";
+import {findLessonsForModule} from "../../actions/lessonActions";
 
 class CourseEditorComponent extends React.Component {
     componentDidMount() {
         const courseId = this.props.match.params.courseId
         const moduleId = this.props.match.params.moduleId
+        console.log(this.props.findModulesForCourse(courseId))
         this.props.findCourseById(courseId)
         this.props.findModulesForCourse(courseId)
         if (moduleId) {
@@ -33,12 +37,13 @@ class CourseEditorComponent extends React.Component {
             <header>
                 <nav className="navbar navbar-expand navbar-dark fixed-top bg-dark">
                     <Link className="navbar-brand btn wbdv-course-editor wbdv-close"
-                          to="/">
+                          to="#">
                         <i className="fas fa-times fa-lg text-light"/>
                     </Link>
 
                     <div className="d-none d-md-block">
-                        <h6 className="navbar-brand wbdv-label wbdv-course-title m-0 p-0">{this.props.course.title}</h6>
+                        <h6 className="navbar-brand wbdv-label wbdv-course-title m-0 p-0">
+                            {this.props.course.title}</h6>
                     </div>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
@@ -81,28 +86,22 @@ class CourseEditorComponent extends React.Component {
     }
 }
 
-const stateToPropertyMapper = (state) => ({
-    course: state.courseReducer.course
-})
+const stateToPropertyMapper = (state) => {
+    return {
+        course: state.courseReducer.course
+    }
+}
 
 const propertyToDispatchMapper = (dispatch) => ({
-    findCourseById: (courseId) => findCourseById(courseId)
-        .then(actualCourse => dispatch({
-                                           type: "SET_COURSES",
-                                           course: actualCourse
-                                       })),
-    findModulesForCourse: (courseId) => moduleService.findModulesForCourse(courseId)
-        .then(actualModules => dispatch({
-                                            type: "FIND_MODULES_FOR_COURSE",
-                                            modules: actualModules
-                                        })),
-    findLessonsForModule: (moduleId) =>
-        lessonService.findLessonsForModule(moduleId)
-            .then(lessons => dispatch({
-                                          type: "FIND_LESSONS_FOR_MODULE",
-                                          lessons,
-                                          moduleId
-                                      }))
+        findCourseById: (courseId) => findCourseById(courseId)
+            .then(actualCourse => dispatch(setCourses(actualCourse))),
+
+        findModulesForCourse: (courseId) => moduleService.findModulesForCourse(courseId)
+            .then(actualModules => dispatch(findModulesForCourse(actualModules))),
+
+        findLessonsForModule: (moduleId) =>
+            lessonService.findLessonsForModule(moduleId)
+                .then(lessons => dispatch(findLessonsForModule(lessons)))
 })
 
 export default connect

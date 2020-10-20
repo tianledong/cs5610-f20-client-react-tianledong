@@ -1,6 +1,6 @@
 export const SET_COURSES = "SET_COURSES";
 
-export const updateLesson = (courses) => ({
+export const setCourses = (course) => ({
     type: SET_COURSES,
-    courses: courses
+    course: course
 })

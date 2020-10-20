@@ -2,7 +2,7 @@ const initialState = {
     modules: []
 };
 
-const moduleReducer = (state = initialState, action) => {
+export const moduleReducer = (state = initialState, action) => {
     switch (action.type) {
         case "FIND_MODULES_FOR_COURSE":
             return {
@@ -33,4 +33,4 @@ const moduleReducer = (state = initialState, action) => {
     }
 }
 
-export default moduleReducer
+export default moduleReducer;

@@ -54,7 +54,7 @@ class CourseManagerContainer extends React.Component {
         return <div>
             <BrowserRouter>
                 <Route
-                    path="/edit/:courseId"
+                    path={["/edit/:courseId", "/edit/:courseId/modules/:moduleId"]}
                     exact
                     component={CourseEditorComponent}/>
                 <Route path="/" exact>
