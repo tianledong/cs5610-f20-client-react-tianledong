@@ -10,8 +10,9 @@ import {combineReducers, createStore} from "redux";
 import moduleReducer from "./reducers/moduleReducer";
 import {lessonReducer} from "./reducers/lessonReducer";
 import {topicReducer} from "./reducers/topicReducer";
+import courseReducer from "./reducers/courseReducer";
 
-const reducer = combineReducers({moduleReducer, lessonReducer, topicReducer});
+const reducer = combineReducers({courseReducer,moduleReducer, lessonReducer, topicReducer});
 
 const store = createStore(reducer);
 

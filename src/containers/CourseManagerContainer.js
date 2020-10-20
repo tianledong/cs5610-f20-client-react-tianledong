@@ -62,7 +62,8 @@ class CourseManagerContainer extends React.Component {
                     <div className={"wbdv-fixed-padding"}>
                         <CourseTableComponent deleteCourse={this.deleteCourse}
                                               updateCourse={this.updateCourse}
-                                              courses={this.state.courses}/>
+                                              courses={this.state.courses}
+                                              addNewCourseByTitle={this.addNewCourseByTitle}/>
                     </div>
                 </Route>
                 <Route path="/grid" exact>
@@ -70,13 +71,11 @@ class CourseManagerContainer extends React.Component {
                     <div className={"wbdv-fixed-padding"}>
                         <CourseGridComponent deleteCourse={this.deleteCourse}
                                              updateCourse={this.updateCourse}
-                                             courses={this.state.courses}/>
+                                             courses={this.state.courses}
+                                             addNewCourseByTitle={this.addNewCourseByTitle}/>
                     </div>
                 </Route>
             </BrowserRouter>
-            <button className="btn wbdv-button wbdv-add-course-abs"
-                    onClick={() => this.addNewCourseByTitle("")}>
-                <i className="fas fa-3x text-danger fa-plus-circle"/></button>
         </div>
     }
 }

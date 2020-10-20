@@ -39,6 +39,9 @@ class CourseGridComponent extends React.Component {
                 }
                 </div>
             </div>
+            <button className="btn wbdv-button wbdv-add-course-abs"
+                    onClick={() => this.addNewCourseByTitle("")}>
+                <i className="fas fa-3x text-danger fa-plus-circle"/></button>
         </div>
     }
 }
