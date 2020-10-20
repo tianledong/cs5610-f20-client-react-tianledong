@@ -8,19 +8,23 @@ import {connect} from "react-redux";
 import {findCourseById} from "../../services/CourseService";
 import moduleService from "../../services/ModuleService";
 import lessonService from "../../services/LessonService";
-import topicService from "../../services/topicService"
 import {Link} from "react-router-dom";
 import {setCourses} from "../../actions/courseActions";
 import {findModulesForCourse} from "../../actions/moduleActions";
+import topicService from "../../services/TopicService";
 
 class CourseEditorComponent extends React.Component {
     componentDidMount() {
         const courseId = this.props.match.params.courseId
         const moduleId = this.props.match.params.moduleId
+        const lessonId = this.props.match.params.lessonId
         this.props.findCourseById(courseId)
         this.props.findModulesForCourse(courseId)
         if (moduleId) {
             this.props.findLessonsForModule(moduleId)
+        }
+        if (lessonId) {
+            this.props.findTopicsForLesson(lessonId)
         }
     }
 
@@ -28,6 +32,10 @@ class CourseEditorComponent extends React.Component {
         const moduleId = this.props.match.params.moduleId
         if (moduleId !== prevProps.match.params.moduleId) {
             this.props.findLessonsForModule(moduleId)
+        }
+        const lessonId = this.props.match.params.lessonId
+        if (lessonId !== prevProps.match.params.lessonId) {
+            this.props.findTopicsForLesson(lessonId)
         }
     }
 

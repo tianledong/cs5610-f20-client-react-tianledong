@@ -13,7 +13,7 @@ export const topicReducer = (state = initialState, action) => {
         case "DELETE_TOPIC":
             return {
                 ...state,
-                topics: state.topics.filter(topic => topic._id !== action.topic._id)
+                topics: state.topics.filter(topic => topic._id !== action.topicId)
             }
         case "CREATE_TOPIC":
             return {

@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import lessonService from "../../services/LessonService";
+import topicService from "../../services/TopicService";
 import {Link} from "react-router-dom";
 
 const TopicPillsComponent = (
@@ -11,13 +11,14 @@ const TopicPillsComponent = (
         courseId,
         moduleId,
         topics = [],
-        createLessonForModule,
-        deleteLesson,
-        updateLesson
+        createTopicForLesson,
+        deleteTopic,
+        updateTopic
     }) =>
     <div>
-        <ul className="nav nav-pills wbdv-lesson-pill-list w-100 justify-content-end">
+        <ul className="nav nav-pills wbdv-lesson-pill-list w-100">
             {
+                topics &&
                 topics.map(topic =>
                                 <li key={topic._id} className="nav-item m-2 wbdv-bg">
                                     {
@@ -27,7 +28,7 @@ const TopicPillsComponent = (
                 <i className="fas fa-lg fa-pencil-alt text-light"/>
               </button>
                                             <Link className="nav-link btn wbdv-lesson-tabs col-9"
-                                                  to={`/edit/${courseId}/modules/${moduleId}/lessons/${lessonId}/topics/${topic._id}`}>{topic.title}</Link>
+                                                  to={"#"}>{topic.title}</Link>
                   </span>
                                     }
                                     {
@@ -38,11 +39,11 @@ const TopicPillsComponent = (
                 <i className="fa fas-lg fa-check text-light"/>
               </button>
                                             <button className="btn col-1 mr-1"
-                                                    onClick={() => deleteLesson(topic._id)}>
+                                                    onClick={() => deleteTopic(topic._id)}>
                                         <i className="fa fa-times text-light"/>
                                     </button>
                                             <input className="col-8 form-control"
-                                                   onChange={(event) => updateLesson(
+                                                   onChange={(event) => updateTopic(
                                                        {
                                                            ...topic,
                                                            title: event.target.value
@@ -54,57 +55,56 @@ const TopicPillsComponent = (
                 )
             }
             <li className="nav-item m-2 wbdv-bg wbdv-topic-pill">
-                <button onClick={() => createLessonForModule(moduleId)}
+                <button onClick={() => createTopicForLesson(lessonId)}
                         className="nav-link wbdv-lesson-add-btn btn">
                     <i className="fas fa-plus fa-lg"/>
                 </button>
             </li>
         </ul>
-
     </div>
 
 const stateToPropertyMapper = (state) => ({
     courseId: state.courseReducer.course._id,
     topics: state.topicReducer.topics,
     moduleId: state.lessonReducer.moduleId,
-    lessonId: state.lessonReducer.lesssonId
+    lessonId: state.topicReducer.lessonId
 })
 
 const dispatchToPropertyMapper = (dispatch) => ({
-    edit: (lesson) =>
-        lessonService.updateLesson(lesson._id, {
-            ...lesson, editing: true
+    edit: (topic) =>
+        topicService.updateTopic(topic._id, {
+            ...topic, editing: true
         }).then(status =>
                     dispatch({
-                                 type: "UPDATE_LESSON",
-                                 lesson: {...lesson, editing: true},
+                                 type: "UPDATE_TOPIC",
+                                 topic: {...topic, editing: true},
                              })),
-    finished: (lesson) =>
-        lessonService.updateLesson(lesson._id, {
-            ...lesson, editing: false
+    finished: (topic) =>
+        topicService.updateTopic(topic._id, {
+            ...topic, editing: false
         }).then(status => dispatch({
-                                       type: "UPDATE_LESSON",
-                                       lesson: {...lesson, editing: false},
+                                       type: "UPDATE_TOPIC",
+                                       topic: {...topic, editing: false},
                                    })),
-    updateLesson: (actualLesson) =>
+    updateTopic: (actualTopic) =>
         dispatch({
-                     type: "UPDATE_LESSON",
-                     lesson: actualLesson,
+                     type: "UPDATE_TOPIC",
+                     topic: actualTopic,
                  }),
-    deleteLesson: (lessonId) =>
-        lessonService.deleteLesson(lessonId)
+    deleteTopic: (topicId) =>
+        topicService.deleteTopic(topicId)
             .then(status => dispatch({
-                                         type: "DELETE_LESSON",
-                                         lessonId
+                                         type: "DELETE_TOPIC",
+                                         topicId
                                      })),
-    createLessonForModule: (moduleId) =>
-        lessonService.createLessonForModule(
-            moduleId, {
-                title: "New Lesson"
+    createTopicForLesson: (lessonId) =>
+        topicService.createTopicForLesson(
+            lessonId, {
+                title: "New Topic"
             })
-            .then(actualLesson => dispatch({
-                                               type: "CREATE_LESSON_FOR_MODULE",
-                                               lesson: actualLesson
+            .then(actualTopic => dispatch({
+                                               type: "CREATE_TOPIC",
+                                               topic: actualTopic
                                            }))
 })
 
