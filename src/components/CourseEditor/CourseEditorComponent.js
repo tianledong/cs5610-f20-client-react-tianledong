@@ -29,11 +29,28 @@ class CourseEditorComponent extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        const courseId = this.props.match.params.courseId
         const moduleId = this.props.match.params.moduleId
-        if (moduleId !== prevProps.match.params.moduleId) {
+        const lessonId = this.props.match.params.lessonId
+
+        if (moduleId === undefined){
+            this.props.findLessonsForModule(null);
+        }
+        if(courseId === undefined) {
+            this.props.findModulesForCourse(null);
+        }
+        if (lessonId === undefined) {
+            this.props.findTopicsForLesson(null);
+        }
+
+        if(courseId !== prevProps.match.params.courseId) {
+            this.props.findModulesForCourse(courseId)
+        }
+
+        if(moduleId !== prevProps.match.params.moduleId) {
             this.props.findLessonsForModule(moduleId)
         }
-        const lessonId = this.props.match.params.lessonId
+
         if (lessonId !== prevProps.match.params.lessonId) {
             this.props.findTopicsForLesson(lessonId)
         }
@@ -116,10 +133,10 @@ const propertyToDispatchMapper = (dispatch) => ({
     findTopicsForLesson: (lessonId) =>
         topicService.findTopicsForLesson(lessonId)
             .then(topics => dispatch({
-                                          type: "FIND_TOPICS_FOR_LESSON",
+                                         type: "FIND_TOPICS_FOR_LESSON",
                                          topics,
                                          lessonId
-                                      }))
+                                     }))
 })
 
 export default connect

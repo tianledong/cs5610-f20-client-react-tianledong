@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import lessonService from "../../services/LessonService";
 import {Link} from "react-router-dom";
+import {createLesson} from "../../actions/lessonActions";
 
 const LessonTabsComponent = (
     {
@@ -100,10 +101,7 @@ const dispatchToPropertyMapper = (dispatch) => ({
             moduleId, {
                 title: "New Lesson"
             })
-            .then(actualLesson => dispatch({
-                                               type: "CREATE_LESSON_FOR_MODULE",
-                                               lesson: actualLesson
-                                           }))
+            .then(actualLesson => dispatch(createLesson(actualLesson)))
 })
 
 export default connect
