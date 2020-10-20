@@ -6,12 +6,12 @@ import TopicPillsComponent from "./TopicPillsComponent";
 import WidgetListComponent from "./WidgetListComponent";
 import {connect} from "react-redux";
 import {findCourseById} from "../../services/CourseService";
-import moduleService from "../../services/ModuleService"
-import lessonService from "../../services/LessonService"
+import moduleService from "../../services/ModuleService";
+import lessonService from "../../services/LessonService";
+import topicService from "../../services/topicService"
 import {Link} from "react-router-dom";
 import {setCourses} from "../../actions/courseActions";
 import {findModulesForCourse} from "../../actions/moduleActions";
-import {findLessonsForModule} from "../../actions/lessonActions";
 
 class CourseEditorComponent extends React.Component {
     componentDidMount() {
@@ -36,7 +36,7 @@ class CourseEditorComponent extends React.Component {
             <header>
                 <nav className="navbar navbar-expand navbar-dark fixed-top bg-dark">
                     <Link className="navbar-brand btn wbdv-course-editor wbdv-close"
-                          to="#">
+                          to="/">
                         <i className="fas fa-times fa-lg text-light"/>
                     </Link>
 
@@ -92,15 +92,26 @@ const stateToPropertyMapper = (state) => {
 }
 
 const propertyToDispatchMapper = (dispatch) => ({
-        findCourseById: (courseId) => findCourseById(courseId)
-            .then(actualCourse => dispatch(setCourses(actualCourse))),
+    findCourseById: (courseId) => findCourseById(courseId)
+        .then(actualCourse => dispatch(setCourses(actualCourse))),
 
-        findModulesForCourse: (courseId) => moduleService.findModulesForCourse(courseId)
-            .then(actualModules => dispatch(findModulesForCourse(actualModules))),
+    findModulesForCourse: (courseId) => moduleService.findModulesForCourse(courseId)
+        .then(actualModules => dispatch(findModulesForCourse(actualModules))),
 
-        findLessonsForModule: (moduleId) =>
-            lessonService.findLessonsForModule(moduleId)
-                .then(lessons => dispatch(findLessonsForModule(lessons)))
+    findLessonsForModule: (moduleId) =>
+        lessonService.findLessonsForModule(moduleId)
+            .then(lessons => dispatch({
+                                          type: "FIND_LESSONS_FOR_MODULE",
+                                          lessons,
+                                          moduleId
+                                      })),
+    findTopicsForLesson: (lessonId) =>
+        topicService.findTopicsForLesson(lessonId)
+            .then(topics => dispatch({
+                                          type: "FIND_TOPICS_FOR_LESSON",
+                                         topics,
+                                         lessonId
+                                      }))
 })
 
 export default connect

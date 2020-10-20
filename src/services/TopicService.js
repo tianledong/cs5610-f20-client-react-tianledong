@@ -14,8 +14,8 @@ export const createTopicForLesson = (lessonId, topic) =>
         }
     }).then(response => response.json())
 
-export const updateTopic = (topic) =>
-    fetch(`${topicUrl}/${topic._id}`, {
+export const updateTopic = (topicId, topic) =>
+    fetch(`${topicUrl}/${topicId}`, {
         method: "PUT",
         body: JSON.stringify(topic),
         headers: {

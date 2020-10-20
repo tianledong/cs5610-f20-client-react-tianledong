@@ -14,8 +14,8 @@ export const createLessonForModule = (moduleId, lesson) =>
         }
     }).then(response => response.json())
 
-export const updateLesson = (lesson) =>
-    fetch(`${lessonUrl}/${lesson._id}`, {
+export const updateLesson = (lessonId ,lesson) =>
+    fetch(`${lessonUrl}/${lessonId}`, {
         method: "PUT",
         body: JSON.stringify(lesson),
         headers: {

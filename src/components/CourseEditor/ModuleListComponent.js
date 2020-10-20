@@ -49,7 +49,7 @@ const ModuleListComponent = (
                                                            title: event.target.value
                                                        })}
                                                    value={module.title}/>
-                <button className="btn wbdv-course-editor wbdv-close"
+                <button className="btn wbdv-course-editor"
                         onClick={() => ok(module)}>
                   <i className="fa fa-lg fa-check text-light"/>
                 </button>

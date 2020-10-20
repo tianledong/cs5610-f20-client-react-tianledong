@@ -7,7 +7,8 @@ export const topicReducer = (state = initialState, action) => {
         case "FIND_TOPICS_FOR_LESSON":
             return {
                 ...state,
-                topics: action.topics
+                topics: action.topics,
+                lessonId: action.lessonId
             }
         case "DELETE_TOPIC":
             return {
