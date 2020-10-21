@@ -3,7 +3,7 @@ import CourseHeadingComponent
     from "../components/CourseManager/CourseHeadingComponent";
 import '../components/CourseManager/CourseManagerComponent.css';
 import CourseTableComponent from "../components/CourseManager/CourseTableComponent";
-import CourseEditorComponent from "../components/CourseEditor/CourseEditorComponent"
+import CourseEditorContainer from "./CourseEditorContainer"
 import {
     deleteCourse,
     findAllCourses,
@@ -57,7 +57,7 @@ class CourseManagerContainer extends React.Component {
                     path={["/edit/:courseId", "/edit/:courseId/modules/:moduleId",
                            "/edit/:courseId/modules/:moduleId/lessons/:lessonId"]}
                     exact
-                    component={CourseEditorComponent}/>
+                    component={CourseEditorContainer}/>
                 <Route path="/" exact>
                     <CourseHeadingComponent addNewCourseByTitle={this.addNewCourseByTitle}/>
                     <div className={"wbdv-fixed-padding"}>

@@ -1,19 +1,19 @@
 import React from "react";
-import "./CourseEditorComponent.css";
-import LessonTabsComponent from "./LessonTabsComponent";
-import ModuleListComponent from "./ModuleListComponent";
-import TopicPillsComponent from "./TopicPillsComponent";
-import WidgetListComponent from "./WidgetListComponent";
+import "../components/CourseEditor/CourseEditorComponent.css";
+import LessonTabsComponent from "../components/CourseEditor/LessonTabsComponent";
+import ModuleListComponent from "../components/CourseEditor/ModuleListComponent";
+import TopicPillsComponent from "../components/CourseEditor/TopicPillsComponent";
+import WidgetListComponent from "../components/CourseEditor/WidgetListComponent";
 import {connect} from "react-redux";
-import {findCourseById} from "../../services/CourseService";
-import moduleService from "../../services/ModuleService";
-import lessonService from "../../services/LessonService";
+import {findCourseById} from "../services/CourseService";
+import moduleService from "../services/ModuleService";
+import lessonService from "../services/LessonService";
 import {Link} from "react-router-dom";
-import {setCourses} from "../../actions/courseActions";
-import {findModulesForCourse} from "../../actions/moduleActions";
-import topicService from "../../services/TopicService";
+import {setCourses} from "../actions/courseActions";
+import {findModulesForCourse} from "../actions/moduleActions";
+import topicService from "../services/TopicService";
 
-class CourseEditorComponent extends React.Component {
+class CourseEditorContainer extends React.Component {
     componentDidMount() {
         const courseId = this.props.match.params.courseId
         const moduleId = this.props.match.params.moduleId
@@ -163,4 +163,4 @@ const propertyToDispatchMapper = (dispatch) => ({
 
 export default connect
 (stateToPropertyMapper, propertyToDispatchMapper)
-(CourseEditorComponent)
+(CourseEditorContainer)
