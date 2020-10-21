@@ -12,13 +12,20 @@ const ModuleListComponent = (
         updateModule,
         edit,
         ok,
+        currentModuleId,
+        currentModule
     }) =>
     <div>
         <ul className="nav nav-pills nav-fill p-3 wbdv-module-list">
             {
                 modules.map(module =>
+
                                 <li key={module._id}
-                                    className="nav-item nav-link m-2 d-flex w-100 wbdv-bg wbdv-module-item">
+                                    onClick={() => currentModule(module)}
+                                    className={`nav-item nav-link m-2 d-flex w-100 wbdv-bg wbdv-module-item ${currentModuleId
+                                                                                                              === module._id
+                                                                                                              ? 'active'
+                                                                                                              : ''}`}>
                                     <button
                                         onClick={() => deleteModule(module)}
                                         className="btn wbdv-course-editor wbdv-close col-2 mr-auto wbdv-module-item-delete-btn">
@@ -28,7 +35,7 @@ const ModuleListComponent = (
                                         !module.editing &&
                                         <span>
                                             <Link
-                                                classname="col-8 wbdv-module-item-title text-left wbdv-module-item-title"
+                                                classname="col-10 btn wbdv-module-item-title text-left wbdv-module-item-title"
                                                 to={`/edit/${course._id}/modules/${module._id}`}>
                     {module.title}
                   </Link>
@@ -69,7 +76,8 @@ const ModuleListComponent = (
 
 const stateToPropertyMapper = (state) => ({
     modules: state.moduleReducer.modules,
-    course: state.courseReducer.course
+    course: state.courseReducer.course,
+    currentModuleId: state.moduleReducer.currentModuleId
 })
 
 const propertyToDispatchMapper = (dispatch) => ({
@@ -104,6 +112,12 @@ const propertyToDispatchMapper = (dispatch) => ({
     updateModule: (module) =>
         dispatch({
                      type: "UPDATE_MODULE",
+                     module: module
+                 }),
+
+    currentModule: (module) =>
+        dispatch({
+                     type: "CLICK_ON_MODULE",
                      module: module
                  })
 })

@@ -12,14 +12,21 @@ const TopicPillsComponent = (
         topics = [],
         createTopicForLesson,
         deleteTopic,
-        updateTopic
+        updateTopic,
+        currentTopic,
+        currentTopicId
     }) =>
     <div>
         <ul className="nav nav-pills wbdv-lesson-pill-list w-100">
             {
                 topics &&
                 topics.map(topic =>
-                               <li key={topic._id} className="nav-item m-2 wbdv-bg">
+                               <li key={topic._id}
+                                   onClick={() => currentTopic(topic)}
+                                   className={`nav-item m-2 ${currentTopicId
+                                                             === topic._id
+                                                             ? 'btn-primary'
+                                                             : 'wbdv-bg'}`}>
                                    {
                                        !topic.editing &&
                                        <span className={"row"}>
@@ -66,25 +73,25 @@ const TopicPillsComponent = (
 
 const stateToPropertyMapper = (state) => ({
     topics: state.topicReducer.topics,
-    lessonId: state.topicReducer.lessonId
+    lessonId: state.topicReducer.lessonId,
+    currentTopicId: state.topicReducer.currentTopicId
 })
 
 const dispatchToPropertyMapper = (dispatch) => ({
     edit: (topic) =>
         topicService.updateTopic(topic._id, {
             ...topic, editing: true
-        }).then(status =>
-                    dispatch({
-                                 type: "UPDATE_TOPIC",
-                                 topic: {...topic, editing: true},
-                             })),
+        }).then(dispatch({
+                             type: "UPDATE_TOPIC",
+                             topic: {...topic, editing: true},
+                         })),
     finished: (topic) =>
         topicService.updateTopic(topic._id, {
             ...topic, editing: false
-        }).then(status => dispatch({
-                                       type: "UPDATE_TOPIC",
-                                       topic: {...topic, editing: false},
-                                   })),
+        }).then(dispatch({
+                             type: "UPDATE_TOPIC",
+                             topic: {...topic, editing: false},
+                         })),
     updateTopic: (actualTopic) =>
         dispatch(updateTopic(actualTopic)),
 
@@ -100,7 +107,12 @@ const dispatchToPropertyMapper = (dispatch) => ({
             .then(actualTopic => dispatch({
                                               type: "CREATE_TOPIC",
                                               topic: actualTopic
-                                          }))
+                                          })),
+    currentTopic: (topic) =>
+        dispatch({
+                     type: "CLICK_ON_TOPIC",
+                     topic: topic
+                 })
 })
 
 export default connect

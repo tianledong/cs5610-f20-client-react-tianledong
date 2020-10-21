@@ -13,13 +13,20 @@ const LessonTabsComponent = (
         lessons = [],
         createLessonForModule,
         deleteLesson,
-        updateLesson
+        updateLesson,
+        currentLessonId,
+        currentLesson
     }) =>
     <div>
         <ul className="nav nav-pills wbdv-lesson-pill-list w-100 justify-content-end">
             {
                 lessons.map(lesson =>
-                                <li key={lesson._id} className="nav-item m-2 wbdv-bg">
+                                <li key={lesson._id}
+                                    onClick={() => currentLesson(lesson)}
+                                    className={`nav-item m-2 ${currentLessonId
+                                                                       === lesson._id
+                                                                       ? 'btn-primary'
+                                                                       : 'wbdv-bg'}`}>
                                     {
                                         !lesson.editing &&
                                         <span className={"row"}>
@@ -68,7 +75,8 @@ const LessonTabsComponent = (
 const stateToPropertyMapper = (state) => ({
     courseId: state.courseReducer.course._id,
     lessons: state.lessonReducer.lessons,
-    moduleId: state.lessonReducer.moduleId
+    moduleId: state.lessonReducer.moduleId,
+    currentLessonId: state.lessonReducer.currentLessonId
 })
 
 const dispatchToPropertyMapper = (dispatch) => ({
@@ -97,7 +105,12 @@ const dispatchToPropertyMapper = (dispatch) => ({
             moduleId, {
                 title: "New Lesson"
             })
-            .then(actualLesson => dispatch(createLesson(actualLesson)))
+            .then(actualLesson => dispatch(createLesson(actualLesson))),
+    currentLesson: (lesson) =>
+        dispatch({
+                     type: "CLICK_ON_LESSON",
+                     lesson: lesson
+                 })
 })
 
 export default connect

@@ -28,6 +28,11 @@ export const moduleReducer = (state = initialState, action) => {
                 modules: state.modules.map(
                     module => module._id === action.module._id ? action.module : module)
             }
+        case "CLICK_ON_MODULE":
+            return {
+                ...state,
+                currentModuleId: action.module._id
+            }
         default:
             return state
     }

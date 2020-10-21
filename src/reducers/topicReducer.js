@@ -29,6 +29,11 @@ export const topicReducer = (state = initialState, action) => {
                 topics: state.topics.map(
                     topic => topic._id === action.topic._id ? action.topic : topic)
             }
+        case "CLICK_ON_TOPIC":
+            return {
+                ...state,
+                currentTopicId: action.topic._id
+            }
         default:
             return state
     }
