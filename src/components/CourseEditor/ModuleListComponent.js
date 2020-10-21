@@ -26,20 +26,17 @@ const ModuleListComponent = (
                                                                                                               === module._id
                                                                                                               ? 'active'
                                                                                                               : ''}`}>
-                                    <button
-                                        onClick={() => deleteModule(module)}
-                                        className="btn wbdv-course-editor wbdv-close col-2 mr-auto wbdv-module-item-delete-btn">
-                                        <i className="fas fa-times fa-lg text-light"/>
-                                    </button>
                                     {
                                         !module.editing &&
-                                        <span>
+                                        <span className={"row"}>
+                                            <span className="btn btn-lg text-uppercase">
                                             <Link
-                                                classname="col-10 btn wbdv-module-item-title text-left wbdv-module-item-title"
+                                                classname="col-10 navbar-brand btn"
                                                 to={`/edit/${course._id}/modules/${module._id}`}>
                     {module.title}
                   </Link>
-                  <button className="btn wbdv-course-editor wbdv-close"
+                                                </span>
+                  <button className="btn wbdv-course-editor wbdv-close col-2"
                           onClick={() => edit(module)}>
                     <i className="fas fa-lg fa-pencil-alt text-light"/>
                   </button>
@@ -48,18 +45,23 @@ const ModuleListComponent = (
                                     }
                                     {
                                         module.editing &&
-                                        <span>
-                                            <input className="col-8"
+                                        <span className={"row"}>
+                                            <input className="col-8 form-control"
                                                    onChange={(event) => updateModule(
                                                        {
                                                            ...module,
                                                            title: event.target.value
                                                        })}
                                                    value={module.title}/>
-                <button className="btn wbdv-course-editor"
+                <button className="btn wbdv-course-editor col-2"
                         onClick={() => ok(module)}>
                   <i className="fa fa-lg fa-check text-light"/>
                 </button>
+                                            <button
+                                                onClick={() => deleteModule(module)}
+                                                className="btn wbdv-course-editor wbdv-close col-2 mr-auto wbdv-module-item-delete-btn">
+                                        <i className="fas fa-times fa-lg text-light"/>
+                                    </button>
               </span>
                                     }
                                 </li>
