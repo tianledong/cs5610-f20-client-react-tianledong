@@ -29,13 +29,11 @@ const ModuleListComponent = (
                                     {
                                         !module.editing &&
                                         <span className={"row"}>
-                                            <span className="btn btn-lg text-uppercase">
                                             <Link
-                                                classname="col-10 navbar-brand btn"
+                                                className="col-10 btn btn-lg text-uppercase"
                                                 to={`/edit/${course._id}/modules/${module._id}`}>
                     {module.title}
                   </Link>
-                                                </span>
                   <button className="btn wbdv-course-editor wbdv-close col-2"
                           onClick={() => edit(module)}>
                     <i className="fas fa-lg fa-pencil-alt text-light"/>
@@ -100,7 +98,7 @@ const propertyToDispatchMapper = (dispatch) => ({
                      })),
     deleteModule: (module) =>
         moduleService.deleteModule(module._id)
-            .then(status => dispatch({
+            .then(dispatch({
                                          type: "DELETE_MODULE",
                                          module: module
                                      })),
