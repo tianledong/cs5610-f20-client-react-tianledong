@@ -31,7 +31,7 @@ export const moduleReducer = (state = initialState, action) => {
         case "CLICK_ON_MODULE":
             return {
                 ...state,
-                currentModuleId: action.module._id
+                currentModuleId: action.moduleId
             }
         default:
             return state

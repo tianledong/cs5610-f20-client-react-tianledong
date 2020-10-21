@@ -32,7 +32,7 @@ export const topicReducer = (state = initialState, action) => {
         case "CLICK_ON_TOPIC":
             return {
                 ...state,
-                currentTopicId: action.topic._id
+                currentTopicId: action.topicId
             }
         default:
             return state

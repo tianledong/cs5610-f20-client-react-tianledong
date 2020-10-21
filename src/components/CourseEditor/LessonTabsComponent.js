@@ -22,7 +22,7 @@ const LessonTabsComponent = (
             {
                 lessons.map(lesson =>
                                 <li key={lesson._id}
-                                    onClick={() => currentLesson(lesson)}
+                                    onClick={() => currentLesson(lesson._id)}
                                     className={`nav-item m-2 ${currentLessonId
                                                                        === lesson._id
                                                                        ? 'btn-primary'
@@ -106,10 +106,10 @@ const dispatchToPropertyMapper = (dispatch) => ({
                 title: "New Lesson"
             })
             .then(actualLesson => dispatch(createLesson(actualLesson))),
-    currentLesson: (lesson) =>
+    currentLesson: (lessonId) =>
         dispatch({
                      type: "CLICK_ON_LESSON",
-                     lesson: lesson
+                     lessonId: lessonId
                  })
 })
 

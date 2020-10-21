@@ -22,7 +22,7 @@ const TopicPillsComponent = (
                 topics &&
                 topics.map(topic =>
                                <li key={topic._id}
-                                   onClick={() => currentTopic(topic)}
+                                   onClick={() => currentTopic(topic._id)}
                                    className={`nav-item m-2 ${currentTopicId
                                                              === topic._id
                                                              ? 'btn-primary'
@@ -108,10 +108,10 @@ const dispatchToPropertyMapper = (dispatch) => ({
                                               type: "CREATE_TOPIC",
                                               topic: actualTopic
                                           })),
-    currentTopic: (topic) =>
+    currentTopic: (topicId) =>
         dispatch({
                      type: "CLICK_ON_TOPIC",
-                     topic: topic
+                     topicId: topicId
                  })
 })
 

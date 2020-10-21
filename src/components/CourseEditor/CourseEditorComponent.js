@@ -39,20 +39,26 @@ class CourseEditorComponent extends React.Component {
 
         if (!moduleId) {
             this.props.findLessonsForModule(null);
+            this.props.currentLesson(null);
         } else if (moduleId && moduleId !== prevProps.match.params.moduleId) {
-            this.props.findLessonsForModule(moduleId)
+            this.props.findLessonsForModule(moduleId);
+            this.props.currentLesson(null);
         }
 
         if (!courseId) {
             this.props.findModulesForCourse(null);
+            this.props.currentModule(null);
         } else if (courseId && courseId !== prevProps.match.params.courseId) {
-            this.props.findModulesForCourse(courseId)
+            this.props.currentModule(null);
+            this.props.findModulesForCourse(courseId);
         }
 
         if (!lessonId) {
             this.props.findTopicsForLesson(null);
+            this.props.currentTopic(null);
         } else if (lessonId && lessonId !== prevProps.match.params.lessonId) {
             this.props.findTopicsForLesson(lessonId)
+            this.props.currentTopic(null);
         }
 
     }
@@ -137,7 +143,22 @@ const propertyToDispatchMapper = (dispatch) => ({
                                          type: "FIND_TOPICS_FOR_LESSON",
                                          topics,
                                          lessonId
-                                     }))
+                                     })),
+    currentModule: (moduleId) =>
+        dispatch({
+                     type: "CLICK_ON_MODULE",
+                     moduleId: moduleId
+                 }),
+    currentLesson: (lessonId) =>
+        dispatch({
+                     type: "CLICK_ON_LESSON",
+                     lessonId: lessonId
+                 }),
+    currentTopic: (topicId) =>
+        dispatch({
+                     type: "CLICK_ON_TOPIC",
+                     topicId: topicId
+                 })
 })
 
 export default connect

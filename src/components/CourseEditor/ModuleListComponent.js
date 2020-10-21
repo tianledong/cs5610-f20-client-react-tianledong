@@ -21,7 +21,7 @@ const ModuleListComponent = (
                 modules.map(module =>
 
                                 <li key={module._id}
-                                    onClick={() => currentModule(module)}
+                                    onClick={() => currentModule(module._id)}
                                     className={`nav-item nav-link m-2 d-flex w-100 wbdv-bg wbdv-module-item ${currentModuleId
                                                                                                               === module._id
                                                                                                               ? 'active'
@@ -91,11 +91,11 @@ const propertyToDispatchMapper = (dispatch) => ({
     edit: (module) =>
         moduleService.updateModule(module._id, {
             ...module, editing: true
-        }).then(status =>
-                    dispatch({
-                                 type: "UPDATE_MODULE",
-                                 module: {...module, editing: true}
-                             })),
+        }).then(
+            dispatch({
+                         type: "UPDATE_MODULE",
+                         module: {...module, editing: true}
+                     })),
     deleteModule: (module) =>
         moduleService.deleteModule(module._id)
             .then(status => dispatch({
@@ -115,10 +115,10 @@ const propertyToDispatchMapper = (dispatch) => ({
                      module: module
                  }),
 
-    currentModule: (module) =>
+    currentModule: (moduleId) =>
         dispatch({
                      type: "CLICK_ON_MODULE",
-                     module: module
+                     moduleId: moduleId
                  })
 })
 

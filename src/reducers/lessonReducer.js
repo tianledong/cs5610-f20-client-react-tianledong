@@ -32,7 +32,7 @@ export const lessonReducer = (state = initialState, action) => {
         case "CLICK_ON_LESSON":
             return {
                 ...state,
-                currentLessonId: action.lesson._id
+                currentLessonId: action.lessonId
             }
         default:
             return state
