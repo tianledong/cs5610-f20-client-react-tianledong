@@ -2,14 +2,13 @@ import React from "react";
 import {connect} from "react-redux";
 import topicService from "../../services/TopicService";
 import {Link} from "react-router-dom";
+import {deleteTopic, updateTopic} from "../../actions/topicActions";
 
 const TopicPillsComponent = (
     {
         finished,
         edit,
         lessonId,
-        courseId,
-        moduleId,
         topics = [],
         createTopicForLesson,
         deleteTopic,
@@ -20,20 +19,20 @@ const TopicPillsComponent = (
             {
                 topics &&
                 topics.map(topic =>
-                                <li key={topic._id} className="nav-item m-2 wbdv-bg">
-                                    {
-                                        !topic.editing &&
-                                        <span className={"row"}>
+                               <li key={topic._id} className="nav-item m-2 wbdv-bg">
+                                   {
+                                       !topic.editing &&
+                                       <span className={"row"}>
                     <button className="btn col-2 ml-2" onClick={() => edit(topic)}>
                 <i className="fas fa-lg fa-pencil-alt text-light"/>
               </button>
                                             <Link className="nav-link btn wbdv-lesson-tabs col-9"
                                                   to={"#"}>{topic.title}</Link>
                   </span>
-                                    }
-                                    {
-                                        topic.editing &&
-                                        <span className={"row"}>
+                                   }
+                                   {
+                                       topic.editing &&
+                                       <span className={"row"}>
               <button className="btn col-1 mx-3" onClick={() =>
                   finished(topic)}>
                 <i className="fa fas-lg fa-check text-light"/>
@@ -50,23 +49,23 @@ const TopicPillsComponent = (
                                                        })}
                                                    value={topic.title}/>
                   </span>
-                                    }
-                                </li>
+                                   }
+                               </li>
                 )
             }
-            <li className="nav-item m-2 wbdv-bg wbdv-topic-pill">
-                <button onClick={() => createTopicForLesson(lessonId)}
-                        className="nav-link wbdv-lesson-add-btn btn">
-                    <i className="fas fa-plus fa-lg"/>
-                </button>
-            </li>
+            {lessonId &&
+             <li className="nav-item m-2 wbdv-bg wbdv-topic-pill">
+                 <button onClick={() => createTopicForLesson(lessonId)}
+                         className="nav-link wbdv-lesson-add-btn btn">
+                     <i className="fas fa-plus fa-lg"/>
+                 </button>
+             </li>
+            }
         </ul>
     </div>
 
 const stateToPropertyMapper = (state) => ({
-    courseId: state.courseReducer.course._id,
     topics: state.topicReducer.topics,
-    moduleId: state.lessonReducer.moduleId,
     lessonId: state.topicReducer.lessonId
 })
 
@@ -87,25 +86,21 @@ const dispatchToPropertyMapper = (dispatch) => ({
                                        topic: {...topic, editing: false},
                                    })),
     updateTopic: (actualTopic) =>
-        dispatch({
-                     type: "UPDATE_TOPIC",
-                     topic: actualTopic,
-                 }),
+        dispatch(updateTopic(actualTopic)),
+
     deleteTopic: (topicId) =>
         topicService.deleteTopic(topicId)
-            .then(status => dispatch({
-                                         type: "DELETE_TOPIC",
-                                         topicId
-                                     })),
+            .then(dispatch(deleteTopic(topicId))),
+
     createTopicForLesson: (lessonId) =>
         topicService.createTopicForLesson(
             lessonId, {
                 title: "New Topic"
             })
             .then(actualTopic => dispatch({
-                                               type: "CREATE_TOPIC",
-                                               topic: actualTopic
-                                           }))
+                                              type: "CREATE_TOPIC",
+                                              topic: actualTopic
+                                          }))
 })
 
 export default connect

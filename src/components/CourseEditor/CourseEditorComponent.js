@@ -22,9 +22,13 @@ class CourseEditorComponent extends React.Component {
         this.props.findModulesForCourse(courseId)
         if (moduleId) {
             this.props.findLessonsForModule(moduleId)
+        } else {
+            this.props.findLessonsForModule(null)
         }
         if (lessonId) {
             this.props.findTopicsForLesson(lessonId)
+        } else {
+            this.props.findTopicsForLesson(null)
         }
     }
 
@@ -33,27 +37,24 @@ class CourseEditorComponent extends React.Component {
         const moduleId = this.props.match.params.moduleId
         const lessonId = this.props.match.params.lessonId
 
-        if (moduleId === undefined){
+        if (!moduleId) {
             this.props.findLessonsForModule(null);
-        }
-        if(courseId === undefined) {
-            this.props.findModulesForCourse(null);
-        }
-        if (lessonId === undefined) {
-            this.props.findTopicsForLesson(null);
-        }
-
-        if(courseId !== prevProps.match.params.courseId) {
-            this.props.findModulesForCourse(courseId)
-        }
-
-        if(moduleId !== prevProps.match.params.moduleId) {
+        } else if (moduleId && moduleId !== prevProps.match.params.moduleId) {
             this.props.findLessonsForModule(moduleId)
         }
 
-        if (lessonId !== prevProps.match.params.lessonId) {
+        if (!courseId) {
+            this.props.findModulesForCourse(null);
+        } else if (courseId && courseId !== prevProps.match.params.courseId) {
+            this.props.findModulesForCourse(courseId)
+        }
+
+        if (!lessonId) {
+            this.props.findTopicsForLesson(null);
+        } else if (lessonId && lessonId !== prevProps.match.params.lessonId) {
             this.props.findTopicsForLesson(lessonId)
         }
+
     }
 
     render() {

@@ -1,4 +1,4 @@
-export const CREATE_LESSON = "CREATE_LESSON";
+export const CREATE_LESSON_FOR_MODULE = "CREATE_LESSON_FOR_MODULE";
 export const UPDATE_LESSON = "UPDATE_LESSON";
 export const DELETE_LESSON = "DELETE_LESSON";
 export const FIND_LESSONS_FOR_MODULE = "FIND_LESSONS_FOR_MODULE";
@@ -9,7 +9,7 @@ export const updateLesson = (newLesson) => ({
 })
 
 export const createLesson = (newLesson) => ({
-    type: CREATE_LESSON,
+    type: CREATE_LESSON_FOR_MODULE,
     lesson: newLesson
 })
 

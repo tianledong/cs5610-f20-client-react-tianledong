@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import lessonService from "../../services/LessonService";
 import {Link} from "react-router-dom";
-import {createLesson} from "../../actions/lessonActions";
+import {createLesson, deleteLesson, updateLesson} from "../../actions/lessonActions";
 
 const LessonTabsComponent = (
     {
@@ -53,12 +53,14 @@ const LessonTabsComponent = (
                                 </li>
                 )
             }
-            <li className="nav-item m-2 wbdv-bg wbdv-topic-pill">
-                <button onClick={() => createLessonForModule(moduleId)}
-                        className="nav-link wbdv-lesson-add-btn btn">
-                    <i className="fas fa-plus fa-lg"/>
-                </button>
-            </li>
+            { moduleId &&
+                <li className="nav-item m-2 wbdv-bg wbdv-topic-pill">
+                    <button onClick={() => createLessonForModule(moduleId)}
+                            className="nav-link wbdv-lesson-add-btn btn">
+                        <i className="fas fa-plus fa-lg"/>
+                    </button>
+                </li>
+            }
         </ul>
 
     </div>
@@ -73,29 +75,23 @@ const dispatchToPropertyMapper = (dispatch) => ({
     edit: (lesson) =>
         lessonService.updateLesson(lesson._id, {
             ...lesson, editing: true
-        }).then(status =>
-                    dispatch({
-                                 type: "UPDATE_LESSON",
-                                 lesson: {...lesson, editing: true},
-                             })),
+        }).then(dispatch({
+                             type: "UPDATE_LESSON",
+                             lesson: {...lesson, editing: true},
+                         })),
     finished: (lesson) =>
         lessonService.updateLesson(lesson._id, {
             ...lesson, editing: false
-        }).then(status => dispatch({
-                                       type: "UPDATE_LESSON",
-                                       lesson: {...lesson, editing: false},
-                                   })),
+        }).then(dispatch({
+                             type: "UPDATE_LESSON",
+                             lesson: {...lesson, editing: false},
+                         })),
     updateLesson: (actualLesson) =>
-        dispatch({
-                     type: "UPDATE_LESSON",
-                     lesson: actualLesson,
-                 }),
+        dispatch(updateLesson(actualLesson)),
+
     deleteLesson: (lessonId) =>
         lessonService.deleteLesson(lessonId)
-            .then(status => dispatch({
-                                         type: "DELETE_LESSON",
-                                         lessonId
-                                     })),
+            .then(dispatch(deleteLesson(lessonId))),
     createLessonForModule: (moduleId) =>
         lessonService.createLessonForModule(
             moduleId, {
