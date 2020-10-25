@@ -30,10 +30,10 @@ const LessonTabsComponent = (
                                     {
                                         !lesson.editing &&
                                         <span className={"row"}>
-                    <button className="btn col-3 ml-2" onClick={() => edit(lesson)}>
+                    <button className="btn col-2 mx-2" onClick={() => edit(lesson)}>
                 <i className="fas fa-lg fa-pencil-alt text-light"/>
               </button>
-                                            <Link className="nav-link btn wbdv-lesson-tabs col-8"
+                                            <Link className="nav-link btn ml-1 wbdv-lesson-tabs col-8"
                                                   to={`/edit/${courseId}/modules/${moduleId}/lessons/${lesson._id}`}>{lesson.title}</Link>
                   </span>
                                     }

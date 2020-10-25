@@ -30,10 +30,10 @@ const TopicPillsComponent = (
                                    {
                                        !topic.editing &&
                                        <span className={"row"}>
-                    <button className="btn col-3 ml-2" onClick={() => edit(topic)}>
+                    <button className="btn col-2 mx-2" onClick={() => edit(topic)}>
                 <i className="fas fa-lg fa-pencil-alt text-light"/>
               </button>
-                                            <Link className="nav-link btn wbdv-lesson-tabs col-8"
+                                            <Link className="nav-link btn ml-1 wbdv-lesson-tabs col-8"
                                                   to={"#"}>{topic.title}</Link>
                   </span>
                                    }
