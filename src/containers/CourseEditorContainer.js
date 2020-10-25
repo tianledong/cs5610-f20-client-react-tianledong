@@ -18,6 +18,10 @@ class CourseEditorContainer extends React.Component {
         const courseId = this.props.match.params.courseId
         const moduleId = this.props.match.params.moduleId
         const lessonId = this.props.match.params.lessonId
+
+        this.props.currentModule(null);
+
+
         this.props.findCourseById(courseId)
         this.props.findModulesForCourse(courseId)
         if (moduleId) {
