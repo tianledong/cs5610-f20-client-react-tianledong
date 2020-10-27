@@ -1,10 +1,10 @@
 import React from "react";
 
-const WidgetParagraphComponent = (props) =>
+export const WidgetParagraphComponent = ({widget, preview}) =>
     <div className="border rounded my-4">
         <div className="row mx-1 my-2">
             <div className="col-md-6 pl-2">
-                <h5 className="mt-2">Paragraph Widget</h5>
+                <h5 className="mt-2">{widget.name}</h5>
             </div>
             <div className="col-md-6 d-flex ml-auto pr-0">
                 <div className="btn btn-warning m-1">
@@ -13,11 +13,9 @@ const WidgetParagraphComponent = (props) =>
                 <div className="btn btn-warning m-1">
                     <i className="fas fa-arrow-down"/>
                 </div>
-                <select className="custom-select m-1">
-                    <option value="heading">Heading</option>
-                    <option value="paragraph" selected>Paragraph</option>
-                    <option value="list">List</option>
-                    <option value="image">Image</option>
+                <select className="custom-select m-1" defaultValue={widget.type}>
+                    <option value="HEADING">Heading</option>
+                    <option value="PARAGRAPH">Paragraph</option>
                 </select>
                 <div className="btn btn-danger m-1">
                     <i className="fas fa-times"/>

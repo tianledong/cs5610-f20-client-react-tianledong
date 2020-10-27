@@ -12,15 +12,16 @@ import {Link} from "react-router-dom";
 import {setCourses} from "../actions/courseActions";
 import {findModulesForCourse} from "../actions/moduleActions";
 import topicService from "../services/TopicService";
+import widgetService from "../services/WidgetService"
 
 class CourseEditorContainer extends React.Component {
     componentDidMount() {
         const courseId = this.props.match.params.courseId
         const moduleId = this.props.match.params.moduleId
         const lessonId = this.props.match.params.lessonId
+        const topicId = this.props.match.params.topicId
 
         this.props.currentModule(null);
-
 
         this.props.findCourseById(courseId)
         this.props.findModulesForCourse(courseId)
@@ -34,12 +35,19 @@ class CourseEditorContainer extends React.Component {
         } else {
             this.props.findTopicsForLesson(null)
         }
+
+        if (topicId) {
+            this.props.findWidgetsForTopic(topicId)
+        } else {
+            this.props.findWidgetsForTopic(null)
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         const courseId = this.props.match.params.courseId
         const moduleId = this.props.match.params.moduleId
         const lessonId = this.props.match.params.lessonId
+        const topicId = this.props.match.params.topicId
 
         if (!moduleId) {
             this.props.findLessonsForModule(null);
@@ -63,6 +71,12 @@ class CourseEditorContainer extends React.Component {
         } else if (lessonId && lessonId !== prevProps.match.params.lessonId) {
             this.props.findTopicsForLesson(lessonId)
             this.props.currentTopic(null);
+        }
+
+        if (!topicId) {
+            this.props.findWidgetsForTopic(null);
+        } else if (topicId && topicId !== prevProps.match.params.topicId) {
+            this.props.findWidgetsForTopic(lessonId)
         }
 
     }
@@ -140,6 +154,13 @@ const propertyToDispatchMapper = (dispatch) => ({
                                           type: "FIND_LESSONS_FOR_MODULE",
                                           lessons,
                                           moduleId
+                                      })),
+    findWidgetsForTopic: (topicId) =>
+        widgetService.findWidgetsForTopic(topicId)
+            .then(widgets => dispatch({
+                                          type: "FIND_WIDGETS_FOR_TOPIC",
+                                          widgets,
+                                          topicId
                                       })),
     findTopicsForLesson: (lessonId) =>
         topicService.findTopicsForLesson(lessonId)

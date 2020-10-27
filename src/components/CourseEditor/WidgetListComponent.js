@@ -1,39 +1,67 @@
-import React from "react";
-import widgetService from "../../services/WidgetService"
+import React, {useState} from "react";
+import widgetService from "../../services/WidgetService";
+import {connect} from "react-redux";
+import {createWidget} from "../../actions/widgetActions";
+import {WidgetHeadingComponent} from "./WidgetHeadingComponent";
+import {WidgetParagraphComponent} from "./WidgetParagraphComponent";
 
-class WidgetListComponent extends React.Component {
-    state = {
-        preview: false
-    }
-    saveAllWidgets = (topicId, widgets) =>
+const WidgetListComponent = ({widgets = [], topicId, createWidgetForTopic}) => {
+    const [preview, setPreview] = useState(false);
+
+    const saveAllWidgets = (topicId, widgets) =>
         widgetService.saveAllWidgetsForTopic(topicId, widgets)
-    togglePreview = (prevState) => {
-        this.setState({
-                          preview: prevState.preview.toggle()
-                      }
-        )
+
+    const togglePreview = () => {
+        setPreview(!preview)
     }
 
-    render() {
-        return <div>
-            <div className="w-100">
-                <div className="ml-auto text-right">
-                    <button className="btn btn-success">save</button>
-                    <div className="custom-control custom-switch d-inline-block">
-                        <input type="checkbox" className="custom-control-input"
-                               id="customSwitches"/>
-                        <label className="custom-control-label"
-                               htmlFor="customSwitches"><strong>Preview</strong></label>
-                    </div>
+    return <div>
+        <div className="w-100">
+            <div className="ml-auto text-right">
+                <button className="btn btn-success" onClick={() => saveAllWidgets()}>Save</button>
+                <div className="custom-control custom-switch d-inline-block">
+                    <input type="checkbox" className="custom-control-input"
+                           id="customSwitches" onClick={() => togglePreview()}/>
+                    <label className="custom-control-label"
+                           htmlFor="customSwitches"><strong>Preview</strong></label>
                 </div>
             </div>
-
-            <button className="ml-auto btn btn-success wbdv-add-widget-fixed"
-                    title="add new widget">
-                <i className="fas fa-plus fa-2x"/>
-            </button>
         </div>
-    }
+        {widgets.map(widget => {
+            if (widget.type === "HEADING") {
+                return <WidgetHeadingComponent key={widget.id} widget={widget}
+                                               preview={preview}/>
+            } else if (widget.type === "PARAGRAPH") {
+                return <WidgetParagraphComponent key={widget.id} widget={widget}
+                                                 preview={preview}/>
+            }
+        })}
+
+        {topicId &&
+         <button className="ml-auto btn btn-success wbdv-add-widget-fixed"
+                 title="add new widget"
+                 onClick={() => createWidgetForTopic(topicId)}>
+             <i className="fas fa-plus fa-2x"/>
+         </button>
+        }
+    </div>
 }
 
-export default WidgetListComponent;
+const stateToPropertyMapper = (state) => ({
+    widgets: state.topicReducer.widgets,
+    topicId: state.widgetReducer.topicId
+})
+
+const dispatchToPropertyMapper = (dispatch) => ({
+    createWidgetForTopic: (topicId) =>
+        widgetService.createWidgetForTopic(
+            topicId, {
+                type: "HEADING"
+            })
+            .then(actualWidget => dispatch(createWidget(actualWidget)))
+})
+
+export default connect
+(stateToPropertyMapper,
+ dispatchToPropertyMapper)
+(WidgetListComponent)

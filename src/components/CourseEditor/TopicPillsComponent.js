@@ -14,7 +14,9 @@ const TopicPillsComponent = (
         deleteTopic,
         updateTopic,
         currentTopic,
-        currentTopicId
+        currentTopicId,
+        courseId,
+        moduleId
     }) =>
     <div>
         <ul className="nav nav-pills wbdv-lesson-pill-list w-100">
@@ -34,7 +36,7 @@ const TopicPillsComponent = (
                 <i className="fas fa-lg fa-pencil-alt text-light"/>
               </button>
                                             <Link className="nav-link btn ml-1 wbdv-lesson-tabs col-8"
-                                                  to={"#"}>{topic.title}</Link>
+                                                  to={`/edit/${courseId}/modules/${moduleId}/lessons/${lessonId}/topics/${topic._id}`}>{topic.title}</Link>
                   </span>
                                    }
                                    {
@@ -72,8 +74,10 @@ const TopicPillsComponent = (
     </div>
 
 const stateToPropertyMapper = (state) => ({
+    courseId: state.courseReducer.course._id,
     topics: state.topicReducer.topics,
     lessonId: state.topicReducer.lessonId,
+    moduleId: state.lessonReducer.moduleId,
     currentTopicId: state.topicReducer.currentTopicId
 })
 
