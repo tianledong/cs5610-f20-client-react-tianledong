@@ -1,14 +1,14 @@
-import React from "react";
+import React, {Component}from "react";
 import {Link} from "react-router-dom";
 
-class CourseCardComponent extends React.Component {
+class CourseCardComponent extends Component {
     state = {
         courseBeingEdited: false,
         course: this.props.course
     }
 
     render() {
-        return <div className="col-lg-2 col-md-4 col-sm-12 mb-3">
+        return <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12 mb-3">
             <div className={"card text-center"}>
                 <img className="card-img-top mb-2" src={require("../../wbdv-pic.jpeg")}
                      alt="Card image cap"/>
