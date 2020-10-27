@@ -14,6 +14,15 @@ export const createWidgetForTopic = (topicId, widget) =>
         }
     }).then(response => response.json())
 
+export const saveAllWidgetsForTopic = (topicId, widgets) =>
+    fetch(`${topicUrl}/${topicId}/widgets`, {
+        method: "PUT",
+        body: JSON.stringify(widgets),
+        headers: {
+            "content-type": "application/json"
+        }
+    }).then(response => response.json())
+
 export const updateWidget = (widgetId, widget) =>
     fetch(`${widgetUrl}/${widgetId}`, {
         method: "PUT",
@@ -28,9 +37,11 @@ export const deleteWidget = (widgetId) =>
         method: "DELETE"
     }).then(response => response.json())
 
+
 export default {
     findWidgetsForTopic,
     createWidgetForTopic,
+    saveAllWidgetsForTopic,
     updateWidget,
     deleteWidget
 }

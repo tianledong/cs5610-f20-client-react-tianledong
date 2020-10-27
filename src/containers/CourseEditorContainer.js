@@ -108,7 +108,7 @@ class CourseEditorContainer extends React.Component {
             </header>
             <main className="row m-0 wbdv-fixed-padding">
                 <div className="col-lg-3 col-md-4 col-sm-5 border-top border-bottom
-                border-secondary bg-dark">
+                border-secondary bg-dark h-100">
                     <ModuleListComponent/>
                 </div>
                 <div className="col-lg-9 col-md-8 col-sm-7 bg-white p-3">
