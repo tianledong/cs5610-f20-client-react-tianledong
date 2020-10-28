@@ -118,6 +118,7 @@ const WidgetHeadingComponent = ({widget, preview, index, updateWidget, deleteWid
 const stateToPropertyMapper = (state) => ({})
 
 const dispatchToPropertyMapper = (dispatch) => ({
+    //only update to redux
     updateWidget: (widget) =>
         dispatch(updateWidget(widget)),
     deleteWidget: (widgetId) =>
