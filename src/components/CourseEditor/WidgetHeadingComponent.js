@@ -1,78 +1,120 @@
 import React from "react";
 import widgetService from "../../services/WidgetService";
-import {createWidget} from "../../actions/widgetActions";
+import {deleteWidget, moveWidget, updateWidget} from "../../actions/widgetActions";
 import {connect} from "react-redux";
 
-export const WidgetHeadingComponent = ({widget, preview}) =>
+const WidgetHeadingComponent = ({widget, preview, index, updateWidget, deleteWidget, moveWidget}) =>
     <div className="border rounded my-4">
-        <div className="row mx-1 my-2">
-            <div className="col-md-6 pl-2">
-                <h5 className="mt-2">Heading Widget</h5>
-            </div>
-            <div className="col-md-6 d-flex ml-auto pr-0">
-                <div className="btn btn-warning m-1">
-                    <i className="fas fa-arrow-up"/>
-                </div>
-                <div className="btn btn-warning m-1">
-                    <i className="fas fa-arrow-down"/>
-                </div>
-                <select className="custom-select m-1" defaultValue={widget.type}>
-                    <option value="HEADING">Heading</option>
-                    <option value="PARAGRAPH">Paragraph</option>
-                </select>
-                <div className="btn btn-danger m-1">
-                    <i className="fas fa-times"/>
-                </div>
-            </div>
-        </div>
-        <div className="row mx-1 my-2">
-            <div className="col p-2">
-                <label htmlFor="heading-widget-text">Heading Text</label>
-                <input type="text" className="form-control" id="heading-widget-text"
-                       placeholder="Heading text"/>
-            </div>
-        </div>
-        <div className="row mx-1 my-2">
-            <div className="col p-2">
-                <label htmlFor="heading-widget-size">Heading Size</label>
-                <select className="custom-select" id="heading-widget-size" defaultValue={widget.size}>
-                    <option value={1}>Heading 1</option>
-                    <option value={2}>Heading 2</option>
-                    <option value={3}>Heading 3</option>
-                    <option value={4}>Heading 4</option>
-                    <option value={5}>Heading 5</option>
-                    <option value={6}>Heading 6</option>
-                </select>
-            </div>
-        </div>
-        <div className="row mx-1 my-2">
-            <div className="col p-2">
-                <label htmlFor="heading-widget-name">Widget Name</label>
-                <input type="text" className="form-control" id="heading-widget-name"
-                       placeholder="Widget name"/>
-            </div>
-        </div>
-        <div className="row mx-1 my-2">
-            <div className="col p-2">
-                <h5>Preview</h5>
-            </div>
-        </div>
-        <div className="row mx-1 my-2">
-            <div className="col p-2">
-                <h1>Heading Text</h1>
-            </div>
-        </div>
+        {preview === false &&
+         <div>
+             <div className="row mx-1 my-2">
+                 <div className="col-md-6 pl-2">
+                     <h5 className="mt-2">Heading Widget</h5>
+                 </div>
+                 <div className="col-md-6 d-flex ml-auto pr-0">
+                     <div className="btn btn-warning m-1"
+                          onClick={() => moveWidget(index, index - 1)}>
+                         <i className="fas fa-arrow-up"/>
+                     </div>
+                     <div className="btn btn-warning m-1"
+                          onClick={() => moveWidget(index, index + 1)}>
+                         <i className="fas fa-arrow-down"/>
+                     </div>
+                     <select className="custom-select m-1" value={widget.type} onChange={event => {
+                         updateWidget({
+                                          ...widget,
+                                          type: event.target.value
+                                      })
+                     }}>
+                         <option value="HEADING">Heading</option>
+                         <option value="PARAGRAPH">Paragraph</option>
+                     </select>
+                     <div className="btn btn-danger m-1" onClick={() => deleteWidget(widget.id)}>
+                         <i className="fas fa-times"/>
+                     </div>
+                 </div>
+             </div>
+             <div className="row mx-1 my-2">
+                 <div className="col p-2">
+                     <label htmlFor={`heading-widget-text-${widget.id}`}>Heading Text</label>
+                     <input type="text" className="form-control" value={ widget.text || ""}
+                            id={`heading-widget-text-${widget.id}`}
+                            onChange={event => {
+                                updateWidget({
+                                                 ...widget,
+                                                 text: event.target.value
+                                             })
+                            }}/>
+                 </div>
+             </div>
+             <div className="row mx-1 my-2">
+                 <div className="col p-2">
+                     <label htmlFor={`heading-widget-size-${widget.id}`}>Heading Size</label>
+                     <select className="custom-select" id={`heading-widget-size-${widget.id}`}
+                             value={widget.size || 1 } onChange={event => {
+                         updateWidget({
+                                          ...widget,
+                                          size: event.target.value
+                                      })
+                     }}>
+                         <option value={1}>Heading 1</option>
+                         <option value={2}>Heading 2</option>
+                         <option value={3}>Heading 3</option>
+                         <option value={4}>Heading 4</option>
+                         <option value={5}>Heading 5</option>
+                         <option value={6}>Heading 6</option>
+                     </select>
+                 </div>
+             </div>
+             <div className="row mx-1 my-2">
+                 <div className="col p-2">
+                     <label htmlFor={`heading-widget-name-${widget.id}`}>Widget Name</label>
+                     <input type="text" className="form-control"
+                            id={`heading-widget-name-${widget.id}`}
+                            value={widget.name || ""} onChange={event => {
+                         updateWidget({
+                                          ...widget,
+                                          name: event.target.value
+                                      })
+                     }}/>
+                 </div>
+             </div>
+         </div>
+        }
+
+        {preview &&
+         <div className="row mx-1 my-2">
+             <div className="col p-2">
+                 <h5>{widget.name}</h5>
+             </div>
+         </div>
+        }
+        {preview &&
+         <div className="row mx-1 my-2">
+             <div className="col p-2">
+                 {console.log(widget.text)}
+                 {console.log(widget.size)}
+                 {widget.size === 1 && <h1>{widget.text}</h1>}
+                 {widget.size === 2 && <h2>{widget.text}</h2>}
+                 {widget.size === 3 && <h3>{widget.text}</h3>}
+                 {widget.size === 4 && <h4>{widget.text}</h4>}
+                 {widget.size === 5 && <h5>{widget.text}</h5>}
+                 {widget.size === 6 && <h6>{widget.text}</h6>}
+             </div>
+         </div>
+        }
     </div>
 
 const stateToPropertyMapper = (state) => ({})
 
 const dispatchToPropertyMapper = (dispatch) => ({
-    createWidgetForTopic: (topicId) =>
-        widgetService.createWidgetForTopic(
-            topicId, {
-                type: "HEADING"
-            })
-            .then(actualWidget => dispatch(createWidget(actualWidget)))
+    updateWidget: (widget) =>
+        dispatch(updateWidget(widget)),
+    deleteWidget: (widgetId) =>
+        widgetService.deleteWidget(widgetId)
+            .then(dispatch(deleteWidget(widgetId))),
+    moveWidget: (from, to) =>
+        dispatch(moveWidget(from, to))
 })
 
 export default connect

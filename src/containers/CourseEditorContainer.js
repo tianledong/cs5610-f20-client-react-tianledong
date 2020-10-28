@@ -27,19 +27,25 @@ class CourseEditorContainer extends React.Component {
         this.props.findModulesForCourse(courseId)
         if (moduleId) {
             this.props.findLessonsForModule(moduleId)
+            this.props.currentModule(moduleId)
         } else {
             this.props.findLessonsForModule(null)
+            this.props.currentModule(null)
         }
         if (lessonId) {
             this.props.findTopicsForLesson(lessonId)
+            this.props.currentLesson(lessonId)
         } else {
             this.props.findTopicsForLesson(null)
+            this.props.currentLesson(null)
         }
 
         if (topicId) {
             this.props.findWidgetsForTopic(topicId)
+            this.props.currentTopic(topicId)
         } else {
             this.props.findWidgetsForTopic(null)
+            this.props.currentTopic(topicId)
         }
     }
 
@@ -76,7 +82,7 @@ class CourseEditorContainer extends React.Component {
         if (!topicId) {
             this.props.findWidgetsForTopic(null);
         } else if (topicId && topicId !== prevProps.match.params.topicId) {
-            this.props.findWidgetsForTopic(lessonId)
+            this.props.findWidgetsForTopic(topicId)
         }
 
     }

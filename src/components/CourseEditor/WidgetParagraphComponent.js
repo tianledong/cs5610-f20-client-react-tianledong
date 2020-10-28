@@ -1,4 +1,7 @@
 import React from "react";
+import widgetService from "../../services/WidgetService";
+import {createWidget} from "../../actions/widgetActions";
+import {connect} from "react-redux";
 
 export const WidgetParagraphComponent = ({widget, preview}) =>
     <div className="border rounded my-4">
@@ -52,3 +55,19 @@ export const WidgetParagraphComponent = ({widget, preview}) =>
             </div>
         </div>
     </div>
+
+const stateToPropertyMapper = (state) => ({})
+
+const dispatchToPropertyMapper = (dispatch) => ({
+    createWidgetForTopic: (topicId) =>
+        widgetService.createWidgetForTopic(
+            topicId, {
+                type: "HEADING"
+            })
+            .then(actualWidget => dispatch(createWidget(actualWidget)))
+})
+
+export default connect
+(stateToPropertyMapper,
+ dispatchToPropertyMapper)
+(WidgetParagraphComponent)

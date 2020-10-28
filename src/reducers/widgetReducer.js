@@ -1,3 +1,5 @@
+import 'array.prototype.move';
+
 const initialState = {
     widgets: []
 };
@@ -27,7 +29,13 @@ export const widgetReducer = (state = initialState, action) => {
             return {
                 ...state,
                 widgets: state.widgets.map(
-                    widget => widget.id === action.topic.id ? action.widget : widget)
+                    widget => widget.id === action.widget.id ? action.widget : widget)
+            }
+        case "MOVE_WIDGET":
+            const newWidgets = state.widgets.move(action.from, action.to);
+            return {
+                ...state,
+                widgets: newWidgets
             }
         default:
             return state
