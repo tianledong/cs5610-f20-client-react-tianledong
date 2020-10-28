@@ -19,7 +19,7 @@ const WidgetListComponent = ({widgets, topicId, createWidgetForTopic}) => {
         {topicId &&
          <div className="w-100">
              <div className="ml-auto text-right">
-                 <button className="btn btn-success" onClick={() => saveAllWidgets(topicId)}>Save</button>
+                 <button className="btn btn-success" onClick={() => saveAllWidgets(topicId, widgets)}>Save</button>
                  <div className="custom-control custom-switch d-inline-block">
                      <input type="checkbox" className="custom-control-input"
                             id="customSwitches" onClick={() => togglePreview()}/>
@@ -59,7 +59,8 @@ const dispatchToPropertyMapper = (dispatch) => ({
     createWidgetForTopic: (topicId) =>
         widgetService.createWidgetForTopic(
             topicId, {
-                type: 'HEADING'
+                type: 'HEADING',
+                size: 1
             })
             .then(actualWidget => dispatch(createWidget(actualWidget)))
 })

@@ -54,15 +54,15 @@ const WidgetHeadingComponent = ({widget, preview, index, updateWidget, deleteWid
                              value={widget.size || 1 } onChange={event => {
                          updateWidget({
                                           ...widget,
-                                          size: event.target.value
+                                          size: parseInt(event.target.value)
                                       })
                      }}>
-                         <option value={1}>Heading 1</option>
-                         <option value={2}>Heading 2</option>
-                         <option value={3}>Heading 3</option>
-                         <option value={4}>Heading 4</option>
-                         <option value={5}>Heading 5</option>
-                         <option value={6}>Heading 6</option>
+                         <option value="1">Heading 1</option>
+                         <option value="2">Heading 2</option>
+                         <option value="3">Heading 3</option>
+                         <option value="4">Heading 4</option>
+                         <option value="5">Heading 5</option>
+                         <option value="6">Heading 6</option>
                      </select>
                  </div>
              </div>
@@ -82,18 +82,28 @@ const WidgetHeadingComponent = ({widget, preview, index, updateWidget, deleteWid
          </div>
         }
 
-        {preview &&
+        {preview === false &&
          <div className="row mx-1 my-2">
              <div className="col p-2">
-                 <h5>{widget.name}</h5>
+                 <h5>Preview</h5>
+             </div>
+         </div>
+        }
+        {preview === false &&
+         <div className="row mx-1 my-2">
+             <div className="col p-2">
+                 {widget.size === 1 && <h1>{widget.text}</h1>}
+                 {widget.size === 2 && <h2>{widget.text}</h2>}
+                 {widget.size === 3 && <h3>{widget.text}</h3>}
+                 {widget.size === 4 && <h4>{widget.text}</h4>}
+                 {widget.size === 5 && <h5>{widget.text}</h5>}
+                 {widget.size === 6 && <h6>{widget.text}</h6>}
              </div>
          </div>
         }
         {preview &&
          <div className="row mx-1 my-2">
              <div className="col p-2">
-                 {console.log(widget.text)}
-                 {console.log(widget.size)}
                  {widget.size === 1 && <h1>{widget.text}</h1>}
                  {widget.size === 2 && <h2>{widget.text}</h2>}
                  {widget.size === 3 && <h3>{widget.text}</h3>}

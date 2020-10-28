@@ -25,7 +25,7 @@ export const findWidgetsForTopic = (widgets) => ({
 })
 
 export const moveWidget = (from, to) => ({
-    type: UPDATE_WIDGET,
+    type: MOVE_WIDGET,
     from: from,
     to: to
 })
