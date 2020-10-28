@@ -33,10 +33,12 @@ const WidgetListComponent = ({widgets, topicId, createWidgetForTopic}) => {
          widgets.map((widget, index) => {
              if (widget.type === "HEADING") {
                  return <WidgetHeadingComponent key={widget.id} widget={widget}
-                                                preview={preview} index={index}/>
+                                                preview={preview} index={index}
+                                                length={widgets.length}/>
              } else if (widget.type === "PARAGRAPH") {
                  return <WidgetParagraphComponent key={widget.id} widget={widget}
-                                                  preview={preview} index={index}/>
+                                                  preview={preview} index={index}
+                                                  length={widgets.length}/>
              }
          })}
 

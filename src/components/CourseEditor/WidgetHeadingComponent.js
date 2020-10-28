@@ -3,7 +3,7 @@ import widgetService from "../../services/WidgetService";
 import {deleteWidget, moveWidget, updateWidget} from "../../actions/widgetActions";
 import {connect} from "react-redux";
 
-const WidgetHeadingComponent = ({widget, preview, index, updateWidget, deleteWidget, moveWidget}) =>
+const WidgetHeadingComponent = ({widget, preview, index, updateWidget, deleteWidget, moveWidget,length}) =>
     <div className="border rounded my-4">
         {preview === false &&
          <div>
@@ -12,14 +12,18 @@ const WidgetHeadingComponent = ({widget, preview, index, updateWidget, deleteWid
                      <h5 className="mt-2">Heading Widget</h5>
                  </div>
                  <div className="col-md-6 d-flex ml-auto pr-0">
-                     <div className="btn btn-warning m-1"
-                          onClick={() => moveWidget(index, index - 1)}>
-                         <i className="fas fa-arrow-up"/>
-                     </div>
-                     <div className="btn btn-warning m-1"
-                          onClick={() => moveWidget(index, index + 1)}>
-                         <i className="fas fa-arrow-down"/>
-                     </div>
+                     {index > 0 &&
+                         <div className="btn btn-warning m-1"
+                              onClick={() => moveWidget(index, index - 1)}>
+                             <i className="fas fa-arrow-up"/>
+                         </div>
+                     }
+                     {index < length - 1 &&
+                         <div className="btn btn-warning m-1"
+                              onClick={() => moveWidget(index, index + 1)}>
+                             <i className="fas fa-arrow-down"/>
+                         </div>
+                     }
                      <select className="custom-select m-1" value={widget.type} onChange={event => {
                          updateWidget({
                                           ...widget,

@@ -32,10 +32,9 @@ export const widgetReducer = (state = initialState, action) => {
                     widget => widget.id === action.widget.id ? action.widget : widget)
             }
         case "MOVE_WIDGET":
-            const newWidgets = state.widgets.move(action.from, action.to);
             return {
                 ...state,
-                widgets: newWidgets
+                widgets: state.widgets.move(action.from, action.to)
             }
         default:
             return state
