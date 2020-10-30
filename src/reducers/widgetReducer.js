@@ -4,6 +4,7 @@ const initialState = {
     widgets: []
 };
 const swapOrder = (from, to, widgets) => {
+    // need a new array than the original one so the component can refresh
     let newWidgets = [...widgets];
     newWidgets[from] = newWidgets.splice(to, 1, newWidgets[from])[0];
     return newWidgets;
