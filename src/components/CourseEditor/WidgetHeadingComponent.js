@@ -1,5 +1,4 @@
 import React from "react";
-import widgetService from "../../services/WidgetService";
 import {deleteWidget, moveWidget, updateWidget} from "../../actions/widgetActions";
 import {connect} from "react-redux";
 
@@ -126,8 +125,7 @@ const dispatchToPropertyMapper = (dispatch) => ({
     updateWidget: (widget) =>
         dispatch(updateWidget(widget)),
     deleteWidget: (widgetId) =>
-        widgetService.deleteWidget(widgetId)
-            .then(dispatch(deleteWidget(widgetId))),
+        dispatch(deleteWidget(widgetId)),
     moveWidget: (from, to) =>
         dispatch(moveWidget(from, to))
 })
