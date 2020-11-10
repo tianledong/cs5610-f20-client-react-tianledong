@@ -1,6 +1,7 @@
 import React from "react";
 import {deleteWidget, moveWidget, updateWidget} from "../../actions/widgetActions";
 import {connect} from "react-redux";
+import WidgetService from "../../services/WidgetService";
 
 const WidgetHeadingComponent = ({widget, preview, index, updateWidget, deleteWidget, moveWidget, length}) =>
     <div className="border rounded my-4">
@@ -127,7 +128,8 @@ const dispatchToPropertyMapper = (dispatch) => ({
     updateWidget: (widget) =>
         dispatch(updateWidget(widget)),
     deleteWidget: (widgetId) =>
-        dispatch(deleteWidget(widgetId)),
+        WidgetService.deleteWidget(widgetId).then(
+            dispatch(deleteWidget(widgetId))),
     moveWidget: (from, to) =>
         dispatch(moveWidget(from, to))
 })

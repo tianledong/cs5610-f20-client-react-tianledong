@@ -1,6 +1,7 @@
 import React from "react";
 import {deleteWidget, moveWidget, updateWidget} from "../../actions/widgetActions";
 import {connect} from "react-redux";
+import WidgetService from "../../services/WidgetService";
 
 export const ListWidgetComponent = ({widget, preview, index, updateWidget, deleteWidget, moveWidget, length}) =>
     <div className="border rounded my-4">
@@ -96,7 +97,7 @@ export const ListWidgetComponent = ({widget, preview, index, updateWidget, delet
                  <ol>
                      {widget.text &&
                       widget.text.split('\n').map(
-                          item => <li>{item}</li>
+                          (item, index) => <li key={`${widget.id}-${index}`}>{item}</li>
                       )}
                  </ol>
              </div>
@@ -108,7 +109,7 @@ export const ListWidgetComponent = ({widget, preview, index, updateWidget, delet
                  <ul>
                      {widget.text &&
                       widget.text.split('\n').map(
-                          item => <li>{item}</li>
+                          (item, index) => <li key={`${widget.id}-${index}`}>{item}</li>
                       )}
                  </ul>
              </div>
@@ -123,7 +124,8 @@ const dispatchToPropertyMapper = (dispatch) => ({
     updateWidget: (widget) =>
         dispatch(updateWidget(widget)),
     deleteWidget: (widgetId) =>
-        dispatch(deleteWidget(widgetId)),
+        WidgetService.deleteWidget(widgetId).then(
+        dispatch(deleteWidget(widgetId))),
     moveWidget: (from, to) =>
         dispatch(moveWidget(from, to))
 })

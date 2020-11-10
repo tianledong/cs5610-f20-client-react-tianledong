@@ -39,7 +39,6 @@ export const widgetReducer = (state = initialState, action) => {
             }
         case "MOVE_WIDGET":
             const newWidgets = swapOrder(action.from, action.to, state.widgets);
-            console.log(newWidgets);
             return {
                 ...state,
                 widgets: newWidgets

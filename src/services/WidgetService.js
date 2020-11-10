@@ -1,5 +1,5 @@
-const topicUrl = "http://localhost:8080/api/topics"
-const widgetUrl = "http://localhost:8080/api/topics";
+const topicUrl = "https://whiteboard-f20.herokuapp.com/api/topics"
+const widgetUrl = "https://whiteboard-f20.herokuapp.com/api/widgets";
 
 export const findWidgetsForTopic = (topicId) =>
     fetch(`${topicUrl}/${topicId}/widgets`)
