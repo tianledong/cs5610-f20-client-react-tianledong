@@ -5,6 +5,7 @@ import {createWidget} from "../../actions/widgetActions";
 import WidgetHeadingComponent from "./WidgetHeadingComponent";
 import WidgetParagraphComponent from "./WidgetParagraphComponent";
 import ListWidgetComponent from "./ListWidgetComponent";
+import WidgetImageComponent from "./WidgetImageComponent";
 
 const WidgetListComponent = ({widgets, topicId, createWidgetForTopic}) => {
     const [preview, setPreview] = useState(false);
@@ -47,7 +48,10 @@ const WidgetListComponent = ({widgets, topicId, createWidgetForTopic}) => {
                      return <ListWidgetComponent key={widget.id} widget={widget}
                                                       preview={preview} index={index}
                                                       length={widgets.length}/>
-
+                 case "IMAGE":
+                     return <WidgetImageComponent key={widget.id} widget={widget}
+                                                 preview={preview} index={index}
+                                                 length={widgets.length}/>
                  default:
                      break;
              }
