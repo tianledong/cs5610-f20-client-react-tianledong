@@ -40,7 +40,7 @@ class CourseTableComponent extends React.Component {
                     </tbody>
                 </table>
                 <button className="btn wbdv-button wbdv-add-course-abs"
-                        onClick={() => this.addNewCourseByTitle("")}>
+                        onClick={() => this.props.addNewCourseByTitle("")}>
                     <i className="fas fa-3x text-danger fa-plus-circle"/></button>
             </div>
         );

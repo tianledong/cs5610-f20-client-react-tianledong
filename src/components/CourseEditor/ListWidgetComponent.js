@@ -42,7 +42,7 @@ export const ListWidgetComponent = ({widget, preview, index, updateWidget, delet
              <div className="row mx-1 my-2">
                  <div className="col p-2">
                      <label htmlFor={`list-widget-text-${widget.id}`}>List Item</label>
-                     <input type="text" className="form-control" value={widget.text || ""}
+                     <textarea rows={3} className="form-control" value={widget.text || ""}
                             id={`list-widget-text-${widget.id}`}
                             onChange={event => {
                                 updateWidget({
@@ -94,9 +94,10 @@ export const ListWidgetComponent = ({widget, preview, index, updateWidget, delet
          <div className="row mx-1 my-2">
              <div className="col p-2">
                  <ol>
-                     {widget.text.split("\n").map(
-                         item => <li>{item}</li>
-                     )}
+                     {widget.text &&
+                      widget.text.split('\n').map(
+                          item => <li>{item}</li>
+                      )}
                  </ol>
              </div>
          </div>
@@ -105,9 +106,10 @@ export const ListWidgetComponent = ({widget, preview, index, updateWidget, delet
          <div className="row mx-1 my-2">
              <div className="col p-2">
                  <ul>
-                     {widget.text.split("\n").map(
-                         item => <li>{item}</li>
-                     )}
+                     {widget.text &&
+                      widget.text.split('\n').map(
+                          item => <li>{item}</li>
+                      )}
                  </ul>
              </div>
          </div>

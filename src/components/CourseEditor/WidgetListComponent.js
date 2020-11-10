@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {createWidget} from "../../actions/widgetActions";
 import WidgetHeadingComponent from "./WidgetHeadingComponent";
 import WidgetParagraphComponent from "./WidgetParagraphComponent";
-import {ListWidgetComponent} from "./ListWidgetComponent";
+import ListWidgetComponent from "./ListWidgetComponent";
 
 const WidgetListComponent = ({widgets, topicId, createWidgetForTopic}) => {
     const [preview, setPreview] = useState(false);

@@ -42,7 +42,7 @@ export const WidgetParagraphComponent = ({widget, preview, index, updateWidget, 
              <div className="row mx-1 my-2">
                  <div className="col p-2">
                      <label htmlFor={`paragraph-widget-text-${widget.id}`}>Paragraph Text</label>
-                     <input type="text" className="form-control" value={widget.text || ""}
+                     <textarea rows={3} className="form-control" value={widget.text || ""}
                             id={`paragraph-widget-text-${widget.id}`}
                             onChange={event => {
                                 updateWidget({
