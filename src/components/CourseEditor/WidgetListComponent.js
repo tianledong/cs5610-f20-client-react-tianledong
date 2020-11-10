@@ -46,24 +46,15 @@ const WidgetListComponent = ({widgets, topicId, createWidgetForTopic}) => {
                                                       length={widgets.length}/>
                  case "LIST":
                      return <ListWidgetComponent key={widget.id} widget={widget}
-                                                      preview={preview} index={index}
-                                                      length={widgets.length}/>
-                 case "IMAGE":
-                     return <WidgetImageComponent key={widget.id} widget={widget}
                                                  preview={preview} index={index}
                                                  length={widgets.length}/>
+                 case "IMAGE":
+                     return <WidgetImageComponent key={widget.id} widget={widget}
+                                                  preview={preview} index={index}
+                                                  length={widgets.length}/>
                  default:
                      break;
              }
-             // if (widget.type === "HEADING") {
-             //     return <WidgetHeadingComponent key={widget.id} widget={widget}
-             //                                    preview={preview} index={index}
-             //                                    length={widgets.length}/>
-             // } else if (widget.type === "PARAGRAPH") {
-             //     return <WidgetParagraphComponent key={widget.id} widget={widget}
-             //                                      preview={preview} index={index}
-             //                                      length={widgets.length}/>
-             // }
          })}
 
         {topicId &&

@@ -1,4 +1,4 @@
-const topicUrl = "https://whiteboard-f20.herokuapp.com/api/topics"
+const topicUrl = "https://wbdv-generic-server.herokuapp.com/api/tianledong/topics"
 const widgetUrl = "https://whiteboard-f20.herokuapp.com/api/widgets";
 
 export const findWidgetsForTopic = (topicId) =>
