@@ -2,13 +2,13 @@ import React from "react";
 import {deleteWidget, moveWidget, updateWidget} from "../../actions/widgetActions";
 import {connect} from "react-redux";
 
-const WidgetHeadingComponent = ({widget, preview, index, updateWidget, deleteWidget, moveWidget, length}) =>
+export const ListWidgetComponent = ({widget, preview, index, updateWidget, deleteWidget, moveWidget, length}) =>
     <div className="border rounded my-4">
         {preview === false &&
          <div>
              <div className="row mx-1 my-2">
                  <div className="col-md-6 pl-2">
-                     <h5 className="mt-2">Heading Widget</h5>
+                     <h5 className="mt-2">List Widget</h5>
                  </div>
                  <div className="col-md-6 d-flex ml-auto pr-0">
                      {index > 0 &&
@@ -41,9 +41,9 @@ const WidgetHeadingComponent = ({widget, preview, index, updateWidget, deleteWid
              </div>
              <div className="row mx-1 my-2">
                  <div className="col p-2">
-                     <label htmlFor={`heading-widget-text-${widget.id}`}>Heading Text</label>
+                     <label htmlFor={`list-widget-text-${widget.id}`}>List Item</label>
                      <input type="text" className="form-control" value={widget.text || ""}
-                            id={`heading-widget-text-${widget.id}`}
+                            id={`list-widget-text-${widget.id}`}
                             onChange={event => {
                                 updateWidget({
                                                  ...widget,
@@ -54,28 +54,24 @@ const WidgetHeadingComponent = ({widget, preview, index, updateWidget, deleteWid
              </div>
              <div className="row mx-1 my-2">
                  <div className="col p-2">
-                     <label htmlFor={`heading-widget-size-${widget.id}`}>Heading Size</label>
-                     <select className="custom-select" id={`heading-widget-size-${widget.id}`}
-                             value={widget.size || 1} onChange={event => {
+                     <label htmlFor={`list-widget-type-${widget.id}`}>List Type</label>
+                     <select className="custom-select" id={`list-widget-style-${widget.id}`}
+                             value={widget.style || "ORDERED"} onChange={event => {
                          updateWidget({
                                           ...widget,
-                                          size: parseInt(event.target.value)
+                                          style: event.target.value
                                       })
                      }}>
-                         <option value="1">Heading 1</option>
-                         <option value="2">Heading 2</option>
-                         <option value="3">Heading 3</option>
-                         <option value="4">Heading 4</option>
-                         <option value="5">Heading 5</option>
-                         <option value="6">Heading 6</option>
+                         <option value="ORDERED">Ordered</option>
+                         <option value="UNORDERED">Unordered</option>
                      </select>
                  </div>
              </div>
              <div className="row mx-1 my-2">
                  <div className="col p-2">
-                     <label htmlFor={`heading-widget-name-${widget.id}`}>Widget Name</label>
+                     <label htmlFor={`list-widget-name-${widget.id}`}>Widget Name</label>
                      <input type="text" className="form-control"
-                            id={`heading-widget-name-${widget.id}`}
+                            id={`list-widget-name-${widget.id}`}
                             value={widget.name || ""} onChange={event => {
                          updateWidget({
                                           ...widget,
@@ -94,27 +90,25 @@ const WidgetHeadingComponent = ({widget, preview, index, updateWidget, deleteWid
              </div>
          </div>
         }
-        {preview === false &&
+        {widget.style === "ORDERED" &&
          <div className="row mx-1 my-2">
              <div className="col p-2">
-                 {widget.size === 1 && <h1>{widget.text}</h1>}
-                 {widget.size === 2 && <h2>{widget.text}</h2>}
-                 {widget.size === 3 && <h3>{widget.text}</h3>}
-                 {widget.size === 4 && <h4>{widget.text}</h4>}
-                 {widget.size === 5 && <h5>{widget.text}</h5>}
-                 {widget.size === 6 && <h6>{widget.text}</h6>}
+                 <ol>
+                     {widget.text.split("\n").map(
+                         item => <li>{item}</li>
+                     )}
+                 </ol>
              </div>
          </div>
         }
-        {preview &&
+        {widget.style === "UNORDERED" &&
          <div className="row mx-1 my-2">
              <div className="col p-2">
-                 {widget.size === 1 && <h1>{widget.text}</h1>}
-                 {widget.size === 2 && <h2>{widget.text}</h2>}
-                 {widget.size === 3 && <h3>{widget.text}</h3>}
-                 {widget.size === 4 && <h4>{widget.text}</h4>}
-                 {widget.size === 5 && <h5>{widget.text}</h5>}
-                 {widget.size === 6 && <h6>{widget.text}</h6>}
+                 <ul>
+                     {widget.text.split("\n").map(
+                         item => <li>{item}</li>
+                     )}
+                 </ul>
              </div>
          </div>
         }
@@ -135,4 +129,4 @@ const dispatchToPropertyMapper = (dispatch) => ({
 export default connect
 (stateToPropertyMapper,
  dispatchToPropertyMapper)
-(WidgetHeadingComponent)
+(ListWidgetComponent)

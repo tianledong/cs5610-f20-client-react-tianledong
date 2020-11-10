@@ -31,6 +31,8 @@ export const WidgetParagraphComponent = ({widget, preview, index, updateWidget, 
                      }}>
                          <option value="HEADING">Heading</option>
                          <option value="PARAGRAPH">Paragraph</option>
+                         <option value="LIST">List</option>
+                         <option value="IMAGE">Image</option>
                      </select>
                      <div className="btn btn-danger m-1" onClick={() => deleteWidget(widget.id)}>
                          <i className="fas fa-times"/>
@@ -39,9 +41,9 @@ export const WidgetParagraphComponent = ({widget, preview, index, updateWidget, 
              </div>
              <div className="row mx-1 my-2">
                  <div className="col p-2">
-                     <label htmlFor={`heading-widget-text-${widget.id}`}>Paragraph Text</label>
+                     <label htmlFor={`paragraph-widget-text-${widget.id}`}>Paragraph Text</label>
                      <input type="text" className="form-control" value={widget.text || ""}
-                            id={`heading-widget-text-${widget.id}`}
+                            id={`paragraph-widget-text-${widget.id}`}
                             onChange={event => {
                                 updateWidget({
                                                  ...widget,
@@ -52,9 +54,9 @@ export const WidgetParagraphComponent = ({widget, preview, index, updateWidget, 
              </div>
              <div className="row mx-1 my-2">
                  <div className="col p-2">
-                     <label htmlFor={`heading-widget-name-${widget.id}`}>Widget Name</label>
+                     <label htmlFor={`paragraph-widget-name-${widget.id}`}>Widget Name</label>
                      <input type="text" className="form-control"
-                            id={`heading-widget-name-${widget.id}`}
+                            id={`paragraph-widget-name-${widget.id}`}
                             value={widget.name || ""} onChange={event => {
                          updateWidget({
                                           ...widget,
