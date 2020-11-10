@@ -45,7 +45,7 @@ class CourseEditorContainer extends React.Component {
             this.props.currentTopic(topicId)
         } else {
             this.props.findWidgetsForTopic(null)
-            this.props.currentTopic(topicId)
+            this.props.currentTopic(null)
         }
     }
 
